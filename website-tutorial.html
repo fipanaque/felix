@@ -11,7 +11,7 @@
 
 
 
-<title>Resources</title>
+<title>Creating Websites with R Markdown</title>
 
 <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -269,30 +269,64 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Resources</h1>
+<h1 class="title toc-ignore">Creating Websites with R Markdown</h1>
 
 </div>
 
 
-<p><br></p>
-<div id="applying-to-phd-programs-in-psychology" class="section level2">
-<h2>Applying to PhD programs in psychology</h2>
-<p><font size="3.5"></p>
-<ul>
-<li><a href="https://www.sokolhessnerlab.com/howapplyingworks" target="_blank" style="color:Tomato">“How applying to graduate school works” - the Sokol-Hessner Lab</a></li>
-<li><a href="https://psychology.fas.harvard.edu/pro-tip" target="_blank" style="color:Tomato">Harvard Psychology’s PhD Resources and Online Tips</a></li>
-<li><a href="https://mitch.web.unc.edu/wp-content/uploads/sites/4922/2017/02/MitchGradSchoolAdvice.pdf" target="_blank" style="color:Tomato">“Mitch’s Uncensored Advice for Applying to Graduate School in Clinical Psychology” - Mitch Prinstein</a> <font size="2.5"> <em>Mostly focused on Clinical Psychology PhD programs, but has good advice for all Psychology PhD applications</em> </font></li>
-<li><a href="https://www.temple.edu/academics/degree-programs/psychology-phd-la-psy-phd" target="_blank" style="color:Tomato">Temple University’s Doctoral Program in Psychology</a></li>
-</ul>
+<p><br> <font size="3.5"> Page adapted from information and advice in <a href="https://www.emilyzabor.com/tutorials/rmarkdown_websites_tutorial.html#Types_of_websites" target="_blank" style="color:Tomato">Emily Zabor’s website tutorial</a>. Please note that this tutorial only reflects my own experience building a website using GitHub pages and R Markdown. It is by no means the only way to set up a website nor is it the only way to build a website using these specific tools. <br></p>
+<div id="set-up-github" class="section level2">
+<h2>Set up GitHub</h2>
+<p>This tutorial focuses on hosting websites through GitHub pages. If you don’t have a GitHub account, you can set one up <a href="https://github.com/join" target="_blank" style="color:Tomato">here</a>. If you already have a GitHub account, log in and navigate to your profile. Now select “Repositories” and click the green “New” button to set up a new repository.</p>
+<p>Importantly, this repository must be named using the following format: <em>github-username</em>.github.io (where <em>github-username</em> is your own username). The name must exactly match this format in order for GitHub to recognize it as a GitHub pages repository.</p>
+<p>You should also select “Add a README file” when initializing this repository. You can choose whether the repository is public or private. Once you’re done, select “Create repository.” <br></p>
+<div id="set-up-repository-locally" class="section level3">
+<h3>Set up repository locally</h3>
+<p>Next, you should clone this repository locally. I’ve found that the easiest way to do this is via the terminal.</p>
+<ol style="list-style-type: decimal">
+<li>Navigate to the local folder you want to host this repository in using the terminal.</li>
+<li>On GitHub, copy the path to this repository by selecting the green “Code” button and copying the HTTPS path.</li>
+<li>Back in the terminal window, type <strong>git clone</strong> and paste the repository path. Press enter. You should now see a subfolder that matches the respository name locally! <br></li>
+</ol>
+</div>
+</div>
+<div id="create-an-r-project" class="section level2">
+<h2>Create an R project</h2>
+<p>Now you’re ready to begin building your website in R! I highly recommend working in RStudio. Create a new project by selecting File &gt; New Project and save this project in your newly created git folder. See Emily Zabor’s <a href="https://www.emilyzabor.com/tutorials/rmarkdown_websites_tutorial.html#Why_do_I_need_an_R_Project" target="_blank" style="color:Tomato">tutorial</a> for more information about why an R Project is useful. <br></p>
+</div>
+<div id="create-initial-content-pages" class="section level2">
+<h2>Create initial content pages</h2>
+<p>There are two key ingredients to an R Markdown website that you will need to create first. The first is a _site.yml file, which controls the layout and theme of your website. The second is a index.Rmd file, which is your home page. You should not change the names of these two files, but you will be able to customize the names of any additional pages you create. I will be creating a website to highlight my favorite coffee and cafes! <br></p>
+<div id="site.yml-setup" class="section level3">
+<h3>_site.yml setup</h3>
+<p>There are a lot of ways to customize your website, but let’s start with a simple layout that has a website title, a navigation bar with two pages, and a specified website theme.</p>
+<pre class="default"><code>name: &quot;Coffee Website&quot;
+navbar:
+  title: &quot;My Coffee Website&quot;
+  right:
+    - text: &quot;Home&quot;
+      href: index.html
+    - text: &quot;Cafes&quot;
+      href: cafes.html
+
+output:
+  html_document:
+    theme: paper</code></pre>
+<p>You can see available themes by typing <strong>rmarkdown:::themes()</strong> into the RStudio console, or see the list below.</p>
+<pre class="default"><code>&quot;default&quot;  &quot;bootstrap&quot;  &quot;cerulean&quot;  &quot;cosmo&quot;  &quot;darkly&quot;  &quot;flatly&quot;  &quot;journal&quot;  &quot;lumen&quot;  &quot;paper&quot;  &quot;readable&quot;  &quot;sandstone&quot;  &quot;simplex&quot;  &quot;spacelab&quot;  &quot;united&quot;  &quot;yeti&quot; </code></pre>
 <p><br></p>
 </div>
-<div id="professional-development" class="section level2">
-<h2>Professional development</h2>
-<p><font size="3.5"></p>
-<ul>
-<li><p><a href="https://www.elsevier.com/connect/creating-a-simple-and-effective-academic-personal-website" target="_blank" style="color:Tomato">Creating a simple and effective academic personal website</a> <font size="2.5"> <em>See information about how I made this website <a href="website-tutorial.html" target="_blank" style="color:Tomato">here</a>.</em> </font></p></li>
-<li><p><a href="https://www.apa.org/science/leadership/students/authorship-paper" target="_blank" style="color:Tomato">American Psychological Association - Tips for Determining Authorship Credit</a></p></li>
-</ul>
+<div id="index.rmd-setup" class="section level3">
+<h3>index.Rmd setup</h3>
+<p>Now let’s define the content on the homepage. To do this, I’m going to create a new R notebook by selecting File &gt; New File &gt; R Notebook.</p>
+<pre class="default"><code>---
+title: &quot;My Coffee Website&quot;
+---
+
+Welcome to my coffee website!</code></pre>
+<p>To make this into a page that a browser recognizes, I need to knit this markdown to an HTML file. Make sure you have the <strong>knitr</strong> package installed. If I select Knit &gt; Knit to HTML, two things happen. One, a new file called index.html appears in my website directory. Two, that index.html opens in a new window. This and other HTML files are what will be displayed when your website is online.</p>
+<p>You can create additional pages and add them to your navigation bar. Just make sure you also update your _site.yml file to display these additional pages.</p>
+</div>
 </div>
 
 <!DOCTYPE html>

@@ -8,10 +8,19 @@ output:
 
 <br>
 
-## Programming and data visualization
-
-<font size="3.5">
-Some of my favorite resources.
-</font>
-
 ## Applying to PhD programs in psychology
+<font size="3.5">
+
+- ["How applying to graduate school works" - the Sokol-Hessner Lab](https://www.sokolhessnerlab.com/howapplyingworks){target="_blank" style="color:Tomato"}
+- [Harvard Psychology's PhD Resources and Online Tips](https://psychology.fas.harvard.edu/pro-tip){target="_blank" style="color:Tomato"}
+- ["Mitch's Uncensored Advice for Applying to Graduate School in Clinical Psychology" - Mitch Prinstein](https://mitch.web.unc.edu/wp-content/uploads/sites/4922/2017/02/MitchGradSchoolAdvice.pdf){target="_blank" style="color:Tomato"} <font size="2.5"> *Mostly focused on Clinical Psychology PhD programs, but has good advice for all Psychology PhD applications* </font>
+- [Temple University's Doctoral Program in Psychology](https://www.temple.edu/academics/degree-programs/psychology-phd-la-psy-phd){target="_blank" style="color:Tomato"}
+
+<br>
+
+## Professional development
+<font size="3.5">
+
+- [Creating a simple and effective academic personal website](https://www.elsevier.com/connect/creating-a-simple-and-effective-academic-personal-website){target="_blank" style="color:Tomato"} <font size="2.5"> *See information about how I made this website [here](website-tutorial.html){target="_blank" style="color:Tomato"}.* </font>
+
+- [American Psychological Association - Tips for Determining Authorship Credit](https://www.apa.org/science/leadership/students/authorship-paper){target="_blank" style="color:Tomato"}
