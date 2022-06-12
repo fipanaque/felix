@@ -1,0 +1,31 @@
+---
+title: "Publications and Selected Presentations"
+output:
+  html_document:
+    includes:
+      after_body: "_site/footer.html"
+---
+
+<br>
+
+## Papers in Preparation
+<font size="2">
++ *denotes equal contribution*
+</font>
+
+<font size="3.5">
+**Schmidt, H.**, Tran, S., & Helion, C. (in preparation). *Conversational linguistic features that inform social network learning.* 
+
+**Schmidt, H.** & Ritchey, M. (in preparation). *Enhancing memory for emotional events with retrieval cueing and retrieval practice.*
+
+**Schmidt, H.^+^**, Cooper, R. A.^+^, & Ritchey, M. (in preparation). *Temporal dynamics supporting the multidimensional qualities of episodic memory.*
+
+</font>
+<br>
+
+## Selected Poster Presentations 
+<font size="3.5">
+
+Click [here](selected-posters.html){target="_blank" style="color:Tomato"} to see a selection of my poster presentations. All presentations are listed on my [CV](files/SchmidtCV-Website.pdf){target="_blank" style="color:Tomato"}.
+
+</font>

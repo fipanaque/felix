@@ -1,0 +1,17 @@
+---
+title: "Resources"
+output:
+  html_document:
+    includes:
+      after_body: "_site/footer.html"
+---
+
+<br>
+
+## Programming and data visualization
+
+<font size="3.5">
+Some of my favorite resources.
+</font>
+
+## Applying to PhD programs in psychology
