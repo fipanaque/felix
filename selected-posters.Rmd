@@ -3,7 +3,7 @@ title: "Selected Poster Presentations"
 output:
   html_document:
     includes:
-      after_body: "_site/footer.html"
+      after_body: "footer.html"
 ---
 
 <br>

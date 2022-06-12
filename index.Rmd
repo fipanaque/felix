@@ -3,7 +3,7 @@ title: "Helen Schmidt"
 output:
   html_document:
     includes:
-      after_body: "_site/footer.html"
+      after_body: "footer.html"
 ---
 
 ```{r pressure, echo=FALSE, out.width = '375px', out.extra='style="float:left; padding:40px"'}
