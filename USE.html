@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Analyzing semantic similarity of text with the Universal Sentence Encoder</title>
+
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+<script src="site_libs/react-17.0.0/react.min.js"></script>
+<script src="site_libs/react-17.0.0/react-dom.min.js"></script>
+<script src="site_libs/reactwidget-1.0.0/react-tools.js"></script>
+<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="site_libs/reactable-binding-0.3.0/reactable.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Helen Schmidt</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="publications.html">Publications</a>
+</li>
+<li>
+  <a href="code-landing.html">Portfolio</a>
+</li>
+<li>
+  <a href="resources.html">Resources</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Analyzing semantic similarity of text with the Universal Sentence Encoder</h1>
+
+</div>
+
+
+<p><br></p>
+<p>This page gives an example of how to analyze semantic similarity of text using Google’s pre-trained Universal Sentence Encoder (USE). In this example, I will be using transcribed dialogue from an episode of <em>Parks &amp; Recreation</em> (Season 3, Episode 2 - “Flu Season”). I have two questions that I want to answer with this data example.</p>
+<ol style="list-style-type: decimal">
+<li>How semantically similar are the characters in this episode of Parks &amp; Rec to each other?<br />
+</li>
+<li>How semantically similar is Leslie Knope to her best friend, Ann Perkins?</li>
+</ol>
+<p>I’ll be using Python within RStudio to work with the USE. To do this, I first need to make sure some Python libraries are installed. I can do that within an R code chunk. <strong>Note:</strong> This demo includes both R and Python code chunks.</p>
+<p><br></p>
+<pre class="r"><code># R code chunk
+library(tidyverse)                    # wrangling and plotting data
+library(reticulate)                   # work between R and Python in RStudio
+library(reactable)                    # nice tables
+library(reactablefmtr)                # format reactable tables
+py_config()                           # make sure I&#39;m using my intended python version 
+py_install(&quot;seaborn&quot;)                 # python data visualization library
+py_install(&quot;tensorflow&quot;)              # machine learning library
+py_install(&quot;tensorflow_hub&quot;,pip=T)    # repository of trained machine learning models
+py_install(&quot;torch&quot;,pip=T)             # machine learning and natural language processing library</code></pre>
+<p><br></p>
+<p>The first thing I need to do is load some necessary libraries and load the pre-trained USE. This is available online here, but I just have a local copy that I’m calling.</p>
+<p><br></p>
+<pre class="python"><code># import necessary libraries
+import tensorflow as tf
+import tensorflow_hub as hub
+import matplotlib.pyplot as plt
+import numpy as np
+import os
+import pandas as pd
+import re
+import seaborn as sns
+import torch
+# get pre-trained USE
+embed = hub.load(&quot;/hschmidt12.github.io/data/universal-sentence-encoder_4&quot;)</code></pre>
+<p><br></p>
+<p>I also need to load the data frame that contains the transcribed dialogue. This dataset is available on Kaggle <a href="https://www.kaggle.com/datasets/heheheluke/parks-and-recreation-scripts" target="_blank" style="color:Tomato">here</a>.</p>
+<p><br></p>
+<pre class="python"><code># read in episode transcription data
+df = pd.read_csv(&quot;./data/PaR-s3e02.csv&quot;)
+
+# show first 5 rows of data frame
+df.head(5)</code></pre>
+<pre><code>##        Character                                               Line
+## 0    Ann Perkins                 There is a crazy flu going around.
+## 1    Ann Perkins  Lots of miserable, dehydrated people with high...
+## 2    Ann Perkins  And one of those dehydrated, highfevered, mise...
+## 3    Ann Perkins                                      Who hates me.
+## 4  April Ludgate                              I want another nurse.</code></pre>
+<p><br></p>
+<p>Once I load the data, I can see that I have two columns – <strong>Character</strong> which indicates the speaker of the dialogue and <strong>Line</strong> which tells me what the character said.</p>
+<p><br></p>
+<pre class="python"><code># save dialogue as new series
+sentences = df.Line
+
+# get list of unique speakers in this episode
+speakers = df.Character.unique()
+
+# alphabetize list of speakers
+speakers.sort()
+
+# print list of speakers
+speakers </code></pre>
+<pre><code>## array([&#39;Andy Dwyer&#39;, &#39;Ann Perkins&#39;, &#39;April Ludgate&#39;, &#39;Ben Wyatt&#39;,
+##        &#39;Chris Traeger&#39;, &#39;Donna Meagle&#39;, &#39;Extra&#39;, &#39;JJ&#39;, &#39;Jerry Gergich&#39;,
+##        &#39;Leslie Knope&#39;, &#39;Ron Swanson&#39;, &#39;Tom Haverford&#39;], dtype=object)</code></pre>
+<p><br></p>
+<p>Now it’s time to run the dialogue through the USE!</p>
+<p>To answer my question about how semantically similar the characters in the episode are to one another, I need to make sure my data is formatted correctly. I need to concatenate <em>all</em> dialogue from the whole episode <em>per speaker</em>. For example, I would take every time Leslie spoke and put all that dialogue into one cell in a new data frame. I need to make sure each of those collections of dialogue are appropriately labeled with the correct speaker too.</p>
+<p>Once I have all the dialogue concatenated, I can run the dialogue through my <code>embed</code> function. This function employs the USE and calculates what’s called an embedding. USE converts text into vectors in high-dimensional space (512 dimensions).</p>
+<p><br></p>
+<pre class="python"><code># loop through all speakers and save 1) just their dialogue and calculate 2) their word embeddings
+speaker_dialogue = []
+speaker_embedding = []
+appended_dialogue = []
+appended_embeddings =[]
+
+for x in speakers:
+  print(x)
+  currentSpeaker = str(x)
+  # get only this current speaker&#39;s sentences from the whole episode
+  speaker = df[df[&quot;Character&quot;] == currentSpeaker]
+  # concatenate all their sentences into one cell
+  currentDialogue = &quot;  &quot;.join(speaker.Line)
+  currentDialogue = [currentDialogue]
+  # create data frame with all of speaker&#39;s dialogue in one cell
+  speaker_dialogue = {&#39;Speaker&#39;:[currentSpeaker],
+                    &#39;Dialogue&#39;:[currentDialogue]}
+  speaker_dialogue = pd.DataFrame(speaker_dialogue)
+  # store dialogue in a list
+  appended_dialogue.append(speaker_dialogue)
+  
+  # run embedding on all of this speaker&#39;s dialogue
+  speaker_embedding = embed(currentDialogue)
+  # store embeddings in a list
+  appended_embeddings.append(speaker_embedding)
+  
+  # combine all speakers&#39; dialogues into a new data frame
+  all_dialogue = pd.concat(appended_dialogue)
+  # combine all embeddings into one tensor shape (# of speakers X 512)
+  speakers_embedding = tf.concat((appended_embeddings),0)
+else:
+  print(&quot;done!&quot;)</code></pre>
+<pre><code>## Andy Dwyer
+## Ann Perkins
+## April Ludgate
+## Ben Wyatt
+## Chris Traeger
+## Donna Meagle
+## Extra
+## JJ
+## Jerry Gergich
+## Leslie Knope
+## Ron Swanson
+## Tom Haverford
+## done!</code></pre>
+<pre class="python"><code>speakers = pd.DataFrame(speakers)
+
+# save speaker list in a csv just so I can pull into R to make the correlation table later
+speakers.to_csv(&#39;./data/speakers.csv&#39;)</code></pre>
+<p><br></p>
+<p>Now I have two data objects that I can use to understand how semantically similar each speaker is to every other speaker. The first object is <em>all_dialogue</em>, which is a data frame that contains each speaker’s name and all the dialogue they spoke during the episode. The second object is <em>speakers_embedding</em>, which is a Tensor. A Tensor is a multidimensional array of elements. In this case, I have a Tensor that contains a 1 x 512 array for each unique speaker (12 speakers).</p>
+<p>Using these arrays, I can calculate the pairwise semantic similarity for each character using a correlation. These correlations represent how semantically similar or dissimilar two speakers are. Values range from 0, not at all similar, to 1, perfectly similar. The semantic similarity of two speakers’ dialogues can be computed as the inner product of the embeddings.</p>
+<p>This will help me answer question 1: <strong>How semantically similar are the characters in this episode of Parks &amp; Rec to each other?</strong></p>
+<p><br></p>
+<pre class="python"><code># using np.inner, I calculate the inner product of vectors contained within the embedding arrays
+
+# plot a heat map of similarity between speakers
+def plot_similarity(labels, features, rotation): # labels = speakers, features = 512 scores, rotation = angle of text
+  corr = np.inner(features, features)            # correlate 512 dimension scores across speakers
+  sns.set(font_scale=1.2)
+  g = sns.heatmap(
+      corr,
+      xticklabels=labels,
+      yticklabels=labels,
+      vmin=0,
+      vmax=1,
+      cmap=&quot;YlGnBu&quot;)
+  g.set_xticklabels(labels, rotation=rotation)
+  g.set_title(&quot;Semantic Similarity Between Parks &amp; Rec Characters&quot;)
+  plt.tight_layout()
+  plt.show()
+
+plot_similarity(all_dialogue[&#39;Speaker&#39;],speakers_embedding, 70)</code></pre>
+<p><img src="USE_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<p>Blue cells indicate higher semantic similarity between speakers, while yellow squares indicate lower similarity. We can see that the majority of the main characters (those who work together in Pawnee’s City Hall) all tend to have greater semantic similarity with each other. On the other hand, JJ, the owner of the local diner, Donna Meagle, who also works in City Hall but does not have a large role in this episode, and the Extras in the episode all have much lower semantic similarity with the main characters.</p>
+<p><br></p>
+<p>Now to answer question 2: <strong>How semantically similar is Leslie Knope to her best friend, Ann Perkins?</strong></p>
+<p>We can see from the heat map that Leslie and Ann have a higher semantic similarity since they have a blue square. But, what exactly is that value? Well, I can save the correlation matrix values that are used to create the heat map and reformat the matrix into a table of correlation values that match the heat map.</p>
+<p><br></p>
+<pre class="python"><code># save correlation matrix as corr
+corr = pd.DataFrame(np.inner(speakers_embedding, speakers_embedding)) 
+# save matrix as a csv
+corr.to_csv(&#39;./data/P&amp;R-correlation-matrix.csv&#39;)</code></pre>
+<pre class="r"><code># R code chunk
+# read in correlation matrix csv
+corr &lt;- read.csv(&#39;./data/P&amp;R-correlation-matrix.csv&#39;)
+# delete first column of generated row numbers
+corr &lt;- corr[,-1]
+# define column and row names based on heat map output
+col.names &lt;- c(&quot;Andy Dwyer&quot;,&quot;Ann Perkins&quot;,&quot;April Ludgate&quot;,&quot;Ben Wyatt&quot;,&quot;Chris Traeger&quot;,
+               &quot;Donna Meagle&quot;,&quot;Extra&quot;,&quot;JJ&quot;,&quot;Jerry Gergich&quot;,&quot;Leslie Knope&quot;,&quot;Ron Swanson&quot;,&quot;Tom Haverford&quot;)
+# row names are the same as column names
+row.names &lt;- col.names
+# change row and column names
+# we have twelve characters in this matrix
+names(corr)[1:12] &lt;- col.names
+rownames(corr) &lt;- row.names
+# print table with cell highlights for Ann and Leslie
+reactable(corr, compact = T, defaultPageSize = 12,
+          columns = list(
+            `Ann Perkins` = colDef(
+              style = cell_style(corr,
+                                 rows = 10,
+                                 font_color = &quot;white&quot;,
+                                 background_color = &quot;#FF6347&quot;)),
+            `Leslie Knope` = colDef(
+              style = cell_style(corr,
+                                 rows = 2,
+                                 font_color = &quot;white&quot;,
+                                 background_color = &quot;#FF6347&quot;))))</code></pre>
+<div id="htmlwidget-a5a1c2d9908321cb083c" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a5a1c2d9908321cb083c">{"x":{"tag":{"name":"Reactable","attribs":{"data":{".rownames":["Andy Dwyer","Ann Perkins","April Ludgate","Ben Wyatt","Chris Traeger","Donna Meagle","Extra","JJ","Jerry Gergich","Leslie Knope","Ron Swanson","Tom Haverford"],"Andy Dwyer":[0.9999999,0.6608968,0.49160397,0.57181007,0.58828354,0.09186194,0.15653092,0.26433557,0.39576703,0.581043,0.6755215,0.5273457],"Ann Perkins":[0.6608968,1,0.5679563,0.5656142,0.6042652,0.12451342,0.12696084,0.2699293,0.41297144,0.63503134,0.5862004,0.48812544],"April Ludgate":[0.49160397,0.5679563,1,0.4941323,0.4865757,0.10242376,0.16246685,0.27776188,0.3671916,0.570634,0.464635,0.4640736],"Ben Wyatt":[0.57181007,0.5656142,0.4941323,1.0000002,0.47911063,0.10400541,0.14140373,0.3619619,0.4775214,0.70906335,0.5681418,0.63225067],"Chris Traeger":[0.58828354,0.6042652,0.4865757,0.47911063,0.99999994,0.104325086,0.21585146,0.13584413,0.34566325,0.5358368,0.51259935,0.46625125],"Donna Meagle":[0.09186194,0.12451342,0.10242376,0.10400541,0.104325086,1.0000002,0.10289804,0.13375734,0.19065566,0.05227279,0.06802182,0.019701414],"Extra":[0.15653092,0.12696084,0.16246685,0.14140373,0.21585146,0.10289804,1,0.17197648,0.16213275,0.17295024,0.14455909,0.29320756],"JJ":[0.26433557,0.2699293,0.27776188,0.3619619,0.13584413,0.13375734,0.17197648,1,0.25364405,0.31923592,0.26787782,0.3095061],"Jerry Gergich":[0.39576703,0.41297144,0.3671916,0.4775214,0.34566325,0.19065566,0.16213275,0.25364405,1.0000002,0.3739318,0.39206958,0.51182526],"Leslie Knope":[0.581043,0.63503134,0.570634,0.70906335,0.5358368,0.05227279,0.17295024,0.31923592,0.3739318,1,0.6241821,0.6391916],"Ron Swanson":[0.6755215,0.5862004,0.464635,0.5681418,0.51259935,0.06802182,0.14455909,0.26787782,0.39206958,0.6241821,0.99999994,0.56937563],"Tom Haverford":[0.5273457,0.48812544,0.4640736,0.63225067,0.46625125,0.019701414,0.29320756,0.3095061,0.51182526,0.6391916,0.56937563,1.0000002]},"columns":[{"accessor":".rownames","name":"","type":"character","sortable":false,"filterable":false,"rowHeader":true},{"accessor":"Andy Dwyer","name":"Andy Dwyer","type":"numeric"},{"accessor":"Ann Perkins","name":"Ann Perkins","type":"numeric","style":[null,null,null,null,null,null,null,null,null,{"transition":"1s ease","borderColor":null,"borderWidth":null,"borderStyle":null,"color":"white","background":"#FF6347","textDecoration":null,"fontStyle":"normal","fontWeight":"normal","display":"flex","alignItems":"start","justifyContent":"flex-end","fontSize":null},null,null]},{"accessor":"April Ludgate","name":"April Ludgate","type":"numeric"},{"accessor":"Ben Wyatt","name":"Ben Wyatt","type":"numeric"},{"accessor":"Chris Traeger","name":"Chris Traeger","type":"numeric"},{"accessor":"Donna Meagle","name":"Donna Meagle","type":"numeric"},{"accessor":"Extra","name":"Extra","type":"numeric"},{"accessor":"JJ","name":"JJ","type":"numeric"},{"accessor":"Jerry Gergich","name":"Jerry Gergich","type":"numeric"},{"accessor":"Leslie Knope","name":"Leslie Knope","type":"numeric","style":[null,{"transition":"1s ease","borderColor":null,"borderWidth":null,"borderStyle":null,"color":"white","background":"#FF6347","textDecoration":null,"fontStyle":"normal","fontWeight":"normal","display":"flex","alignItems":"start","justifyContent":"flex-end","fontSize":null},null,null,null,null,null,null,null,null,null,null]},{"accessor":"Ron Swanson","name":"Ron Swanson","type":"numeric"},{"accessor":"Tom Haverford","name":"Tom Haverford","type":"numeric"}],"defaultPageSize":12,"paginationType":"numbers","showPageInfo":true,"minRows":1,"compact":true,"dataKey":"23440e1869e573cc603540ad03e627b9"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<p><br></p>
+<p>We can see that Leslie and Ann have a semantic similarity of 0.635, which is pretty high! Interestingly, this is Ann’s highest similarity with another character except for Andy, whom she used to date. And for Leslie, her highest similarity values are with Ann, her best friend, Ben, her romantic interest, and with Tom, a colleague that directly reports to her.</p>
+<p>All together, these similarity values give us some valuable insight into the relationships between these characters!</p>
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>footer.knit</title>
+
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Helen Schmidt</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="publications.html">Publications</a>
+</li>
+<li>
+  <a href="code-landing.html">Portfolio</a>
+</li>
+<li>
+  <a href="resources.html">Resources</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<p><font size="4"></p>
+  <!-- add line to divide content from footer -->
+<hr />
+<p style="text-align: center;">
+© 2022 Helen Schmidt
+</p>
+<!-- Add icon library -->
+<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></p>
+<p><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"></p>
+<p><link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css"></p>
+<p><font size="6"></p>
+<!-- Add icons from font awesome -->
+<p style="text-align: center;">
+<a href="https://github.com/hschmidt12" target="_blank" class="fab fa-github" style="color:Tomato"></a> <a href="https://twitter.com/_helenschmidt_" target="_blank" class="fab fa-twitter" style="color:Tomato"></a> <a href="https://www.linkedin.com/in/helen-schmidt-03b508131/" target="_blank" class="fab fa-linkedin" style="color:Tomato"></a>
+</p>
+<p></font></p>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

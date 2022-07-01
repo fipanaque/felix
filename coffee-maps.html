@@ -11,7 +11,7 @@
 
 
 
-<title>Resources</title>
+<title>Creating Maps And Mapping Geospatial Data in R</title>
 
 <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -32,6 +32,12 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+<script src="site_libs/react-17.0.0/react.min.js"></script>
+<script src="site_libs/react-17.0.0/react-dom.min.js"></script>
+<script src="site_libs/reactwidget-1.0.0/react-tools.js"></script>
+<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="site_libs/reactable-binding-0.3.0/reactable.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -272,31 +278,135 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Resources</h1>
+<h1 class="title toc-ignore">Creating Maps And Mapping Geospatial Data in R</h1>
 
 </div>
 
 
 <p><br></p>
-<div id="applying-to-phd-programs-in-psychology" class="section level2">
-<h2>Applying to PhD programs in psychology</h2>
-<p><font size="3.5"></p>
-<ul>
-<li><a href="https://www.sokolhessnerlab.com/howapplyingworks" target="_blank" style="color:Tomato">“How applying to graduate school works” - the Sokol-Hessner Lab</a></li>
-<li><a href="https://psychology.fas.harvard.edu/pro-tip" target="_blank" style="color:Tomato">Harvard Psychology’s PhD Resources and Online Tips</a></li>
-<li><a href="https://mitch.web.unc.edu/wp-content/uploads/sites/4922/2017/02/MitchGradSchoolAdvice.pdf" target="_blank" style="color:Tomato">“Mitch’s Uncensored Advice for Applying to Graduate School in Clinical Psychology” - Mitch Prinstein</a></li>
-<li><a href="https://www.temple.edu/academics/degree-programs/psychology-phd-la-psy-phd" target="_blank" style="color:Tomato">Temple University’s Doctoral Program in Psychology</a></li>
-</ul>
+<p>This page gives an example of how to create and plot maps in R and map quantitative data on these maps. For this example, I will be plotting domestic coffee consumption in Scandinavia (Denmark, Finland, Norway, and Sweden) from 1990 to 2012 using data from the International Coffee Organization. Consumption is measured in thousands of 60 kg bags of coffee.</p>
+<p>Let’s start by loading some packages.</p>
+<pre class="r"><code>library(grid)           # graphical objects
+library(maps)           # geographical maps
+library(mapdata)        # supplement to maps package
+library(ggmap)          # visualizing spatial data on static maps
+library(mapproj)        # convert latitude/longitude into projected coordinates
+library(cowplot)        # ggplot add-on
+library(MetBrewer)      # color palette 
+library(tidyverse)      # tidy framework
+library(gganimate)      # animate plots
+library(gifski)         # save animations as gifs
+library(reactable)      # nice tables</code></pre>
 <p><br></p>
-</div>
-<div id="professional-development" class="section level2">
-<h2>Professional development</h2>
-<p><font size="3.5"></p>
-<ul>
-<li><a href="https://www.elsevier.com/connect/creating-a-simple-and-effective-academic-personal-website" target="_blank" style="color:Tomato">Creating a simple and effective academic personal website</a> <!-- <font size="2.5"> *See information about how I made this website [here](website-tutorial.html){target="_blank" style="color:Tomato"}.* </font> --></li>
-<li><a href="https://www.apa.org/science/leadership/students/authorship-paper" target="_blank" style="color:Tomato">American Psychological Association - Tips for Determining Authorship Credit</a></li>
-</ul>
-</div>
+<p>I will read in the consumption data as <code>df</code> and define a coffee-themed color palette.</p>
+<p><br></p>
+<pre class="r"><code>df &lt;- read.csv(&quot;./data/disappearance.csv&quot;) 
+colors &lt;- c(&quot;#DFB78C&quot;,&quot;#AB6832&quot;,&quot;#49281A&quot;)</code></pre>
+<p><br></p>
+<p>Now I want to create my map and only plot the countries I’m interested in. Using <code>map_data</code> from the <code>ggplot2</code> package, I can import a world map. Then, I can filter that world map to include only Finland, Norway, Sweden, and Denmark.</p>
+<p><br></p>
+<pre class="r"><code>## get world map
+world &lt;- map_data(&#39;world&#39;)
+## make a list of Scandinavian countries
+scandi_list &lt;- c(&quot;Finland&quot;,&quot;Norway&quot;,&quot;Sweden&quot;,&quot;Denmark&quot;)
+## filter out Scandinavian countries from world map
+scandi &lt;- filter(world, region %in% scandi_list)</code></pre>
+<p><br></p>
+<p>I also want to reshape my coffee data so I can plot it later on. To do this, I need to first transform the data from wide to long format. By printing the first six rows, I can see that I’ve successfully transformed my data frame into long format with a single column for each country (region), year, and amount of coffee consumed (consumption).</p>
+<p><br></p>
+<pre class="r"><code>## reshape data into long format
+df &lt;- pivot_longer(df,
+                   cols = X1990:X2018,
+                   names_to = &quot;Year&quot;,
+                   values_to = &quot;Consumption&quot;)
+df &lt;- filter(df, region %in% scandi_list)
+
+## preview data frame
+reactable(head(df), compact = T)</code></pre>
+<div id="htmlwidget-b992398a3e0cb932b844" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-b992398a3e0cb932b844">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"region":["Denmark","Denmark","Denmark","Denmark","Denmark","Denmark"],"Year":["X1990","X1991","X1992","X1993","X1994","X1995"],"Consumption":[865.1389994,908.5420009,958.834999,890.5559968,908.4830013,757.796998]},"columns":[{"accessor":"region","name":"region","type":"character"},{"accessor":"Year","name":"Year","type":"character"},{"accessor":"Consumption","name":"Consumption","type":"numeric"}],"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"compact":true,"dataKey":"8aa357fcbe8f99e7632338ad6a2b03f7"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<p><br></p>
+<p>Now I need to merge this coffee consumption data with my map information. To do this, I will iterate through all years and match the coffee consumption data with the appropriate country data.</p>
+<p><br></p>
+<pre class="r"><code>## define a new data frame for my combined map and coffee data
+all.years &lt;- data.frame()
+
+## loop through all years 
+years &lt;- unique(df$Year)              # get a list of all unique years
+for (i in 1:length(years)) {          # loop through the number of years
+  year &lt;- years[i]                    # define current year
+  data &lt;- subset(df, df$Year == year) # subset the coffee data frame
+  
+  # Match coffee consumption data with map
+  scandi$coffee_consumption &lt;- data$Consumption[match(scandi$region,data$region)]
+  # make group and region a factor
+  scandi$group &lt;- as.factor(scandi$group)
+  scandi$region &lt;- as.factor(scandi$region)
+  # save the year information in a new column
+  scandi$year &lt;- year
+  # combine all years together
+  all.years &lt;- rbind(all.years,scandi)
+}
+## preview new data frame
+reactable(head(all.years), compact = T)</code></pre>
+<div id="htmlwidget-49487f070a2428cb0cd6" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-49487f070a2428cb0cd6">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"long":[20.611328125,20.6034183502197,20.5217761993408,20.4875011444092,20.4112319946289,20.39794921875],"lat":[60.0406761169434,60.0169410705566,60.0116691589355,60.0327644348145,60.0301284790039,60.0406761169434],"group":["7","7","7","7","7","7"],"order":[884,885,886,887,888,889],"region":["Finland","Finland","Finland","Finland","Finland","Finland"],"subregion":["Aland Islands","Aland Islands","Aland Islands","Aland Islands","Aland Islands","Aland Islands"],"coffee_consumption":[1070.434998,1070.434998,1070.434998,1070.434998,1070.434998,1070.434998],"year":["X1990","X1990","X1990","X1990","X1990","X1990"]},"columns":[{"accessor":"long","name":"long","type":"numeric"},{"accessor":"lat","name":"lat","type":"numeric"},{"accessor":"group","name":"group","type":"factor"},{"accessor":"order","name":"order","type":"numeric"},{"accessor":"region","name":"region","type":"factor"},{"accessor":"subregion","name":"subregion","type":"character"},{"accessor":"coffee_consumption","name":"coffee_consumption","type":"numeric"},{"accessor":"year","name":"year","type":"character"}],"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"compact":true,"dataKey":"cfec722384ed3cd4c3d80c2f9f02a29e"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<p><br></p>
+<p>Great! Now I have my map data combined with my coffee consumption data. But I have a few problems. 1) The year column still has an <em>X</em> in front of each year value. 2) I’m missing data for some of my countries from after 2012.</p>
+<p>First, I’ll remove the X in the year column by using the <code>substring</code> function. I’ll also make sure to make year numeric.</p>
+<p><br></p>
+<pre class="r"><code>## remove the X placeholder at the front of each year value
+all.years$year &lt;- substring(all.years$year, 2)
+## make year numeric
+all.years$year &lt;- as.numeric(all.years$year)</code></pre>
+<p><br></p>
+<p>For the sake of simplicity, I’ll only include data from 1990 to 2012 in my maps.</p>
+<p><br></p>
+<pre class="r"><code>all.years &lt;- subset(all.years, all.years$year &lt;= 2012)</code></pre>
+<p><br></p>
+<p>Now let’s make some maps!</p>
+<p>To start, I just want to plot a map that shows how many thousands of 60kg bags of coffee were consumed in each country in 2012.</p>
+<p><br></p>
+<pre class="r"><code># subset all.years into just data from 2012
+this.year &lt;- subset(all.years, year == 2012)
+
+ggplot(data = this.year) + 
+  labs(title = &quot;Year: 2012&quot;) +
+  geom_polygon(aes(x=long, y=lat, group = group, fill = coffee_consumption), 
+               color = &quot;white&quot;, size = 0.5) +
+  coord_fixed(1.6) +
+  theme_classic() +
+  xlab(NULL) + ylab(NULL) + 
+  scale_fill_gradient(name = &quot;&quot;, low = colors[1], high = colors[3]) +
+  theme(legend.position = &quot;bottom&quot;, 
+        legend.key.height = unit(0.25, &quot;cm&quot;), 
+        legend.text = element_text(size = 6), 
+        line = element_blank(), 
+        axis.text.x = element_blank(), 
+        axis.text.y = element_blank())</code></pre>
+<p><img src="coffee-maps_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<p>This looks great! But, this only visually tells me about coffee consumption in 2012. What if I want to look at how coffee consumption changes over time?</p>
+<p>A fun way to visualize changes over time is to create an animated gif of multiple maps. To do this, I’ll plot the same map as above, with a few changes to the code.</p>
+<p><br></p>
+<pre class="r"><code>plot &lt;- ggplot(data = all.years) + 
+  transition_manual(year) + labs(title = &quot;Year: {current_frame}&quot;) +
+  geom_polygon(aes(x=long, y=lat, group = group, fill = coffee_consumption), 
+               color = &quot;white&quot;, size = 0.5) +
+  coord_fixed(1.6) +
+  theme_classic() +
+  xlab(NULL) + ylab(NULL) + 
+  scale_fill_gradient(name = &quot;&quot;, low = colors[1], high = colors[3]) +
+  theme(legend.position = &quot;bottom&quot;, 
+        legend.key.height = unit(0.25, &quot;cm&quot;), 
+        legend.text = element_text(size = 6),
+        line = element_blank(), 
+        axis.text.x = element_blank(), 
+        axis.text.y = element_blank())
+
+## make into a gif
+animate(plot, duration = 10, fps = 20, renderer = gifski_renderer())</code></pre>
+<p><img src="coffee-maps_files/figure-html/unnamed-chunk-9-1.gif" style="display: block; margin: auto;" /></p>
 
 <!DOCTYPE html>
 

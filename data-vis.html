@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Basic Data Visualization in R</title>
+
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+<script src="site_libs/react-17.0.0/react.min.js"></script>
+<script src="site_libs/react-17.0.0/react-dom.min.js"></script>
+<script src="site_libs/reactwidget-1.0.0/react-tools.js"></script>
+<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="site_libs/reactable-binding-0.3.0/reactable.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Helen Schmidt</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="publications.html">Publications</a>
+</li>
+<li>
+  <a href="code-landing.html">Portfolio</a>
+</li>
+<li>
+  <a href="resources.html">Resources</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Basic Data Visualization in R</h1>
+
+</div>
+
+
+<style>
+  .nav-pills>li>a:focus, .nav-pills>li.active>a, .nav-pills>li.active>a:focus{
+     background-color: #FF6347
+     }
+  .nav-pills>li>a {
+     color: #FF6347;
+     }
+}
+</style>
+<!-- Add icon library -->
+<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></p>
+<p><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"></p>
+<p><link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css"></p>
+<p><br></p>
+<p>This demo uses an open-source dataset to explore different data wrangling and plotting techniques in R. Data organization is hugely important because it can impact the quality and accuracy of any statistical tests or visualizations. A popular collection of data organization packages is the <code>tidyverse</code>, which all share an “underlying design philosophy, grammar, and data structure” (<a href="https://www.tidyverse.org/" target="_blank" style="color:Tomato">see more</a>).</p>
+<p>The basic structure of tidy data is every variable goes into a column and every column is a variable. Using this framework, we can manipulate the data to calculate new values, run statistical tests, and generate a graphic. In this demo, I will primarily use <code>dplyr</code>, <code>ggplot2</code>, and <code>tidyr</code> to organize my data and make some beautiful plots. I will be using the <a href="https://www.kaggle.com/datasets/paradisejoy/top-hits-spotify-from-20002019" target="_blank" style="color:Tomato">Top Hits Spotify from 2000 - 2019</a> dataset, available on Kaggle.</p>
+<p><br></p>
+<div id="load-packages-and-data" class="section level2">
+<h2>Load packages and data</h2>
+<p><br></p>
+<p>First, I will load the packages I need. If you do not already have tidyverse packages installed on your computer, you should install them using <code>install.packages('tidyverse')</code> first. The other packages I’m loading will be useful for customizing my plots. I’ll also set a global theme to <code>theme_classic</code>.</p>
+<p><br></p>
+<pre class="r"><code>library(ggpubr)                 # ggplot customization
+library(Rmisc)                  # basic statistics helper
+library(tidyverse)              # load all tidyverse packages
+library(reactable)              # format tables in a nice way
+library(gganimate)              # animate plots
+library(scales)                 # ggplot scale customization
+library(icons)                  # icon library
+theme_set(theme_classic())      # set classic theme</code></pre>
+<p>I will also read in the dataset as <code>df_raw</code> and look at the first few rows to get a sense of the variables I’m working with.</p>
+<pre class="r"><code># read in data
+df_raw &lt;- read.csv(&#39;./data/songs_normalize.csv&#39;)
+# see first six rows of all variables
+reactable(head(df_raw), compact = T)</code></pre>
+<div id="htmlwidget-71002147ab8913115981" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-71002147ab8913115981">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"artist":["Britney Spears","blink-182","Faith Hill","Bon Jovi","*NSYNC","Sisqo"],"song":["Oops!...I Did It Again","All The Small Things","Breathe","It's My Life","Bye Bye Bye","Thong Song"],"duration_ms":[211160,167066,250546,224493,200560,253733],"explicit":["False","False","False","False","False","True"],"year":[2000,1999,1999,2000,2000,1999],"popularity":[77,79,66,78,65,69],"danceability":[0.751,0.434,0.529,0.551,0.614,0.706],"energy":[0.834,0.897,0.496,0.913,0.928,0.888],"key":[1,0,7,0,8,2],"loudness":[-5.444,-4.918,-9.007,-4.063,-4.806,-6.959],"mode":[0,1,1,0,0,1],"speechiness":[0.0437,0.0488,0.029,0.0466,0.0516,0.0654],"acousticness":[0.3,0.0103,0.173,0.0263,0.0408,0.119],"instrumentalness":[1.77e-05,0,0,1.35e-05,0.00104,9.64e-05],"liveness":[0.355,0.612,0.251,0.347,0.0845,0.07],"valence":[0.894,0.684,0.278,0.544,0.879,0.714],"tempo":[95.053,148.726,136.859,119.992,172.656,121.549],"genre":["pop","rock, pop","pop, country","rock, metal","pop","hip hop, pop, R&B"]},"columns":[{"accessor":"artist","name":"artist","type":"character"},{"accessor":"song","name":"song","type":"character"},{"accessor":"duration_ms","name":"duration_ms","type":"numeric"},{"accessor":"explicit","name":"explicit","type":"character"},{"accessor":"year","name":"year","type":"numeric"},{"accessor":"popularity","name":"popularity","type":"numeric"},{"accessor":"danceability","name":"danceability","type":"numeric"},{"accessor":"energy","name":"energy","type":"numeric"},{"accessor":"key","name":"key","type":"numeric"},{"accessor":"loudness","name":"loudness","type":"numeric"},{"accessor":"mode","name":"mode","type":"numeric"},{"accessor":"speechiness","name":"speechiness","type":"numeric"},{"accessor":"acousticness","name":"acousticness","type":"numeric"},{"accessor":"instrumentalness","name":"instrumentalness","type":"numeric"},{"accessor":"liveness","name":"liveness","type":"numeric"},{"accessor":"valence","name":"valence","type":"numeric"},{"accessor":"tempo","name":"tempo","type":"numeric"},{"accessor":"genre","name":"genre","type":"character"}],"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"compact":true,"dataKey":"c798436bb4b06988efcd17233450f0a2"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<p>Based on the data, it looks like I have 18 variables. These are further explained on the Kaggle page for this dataset. This is <em>a lot of data</em>, so it’s useful to break down and organize the data depending on my analysis questions. This is where <code>dplyr</code> and <code>tidyr</code> come in handy.</p>
+<p>I also noticed that despite the dataset saying it includes songs from 2000 to 2019, I see some songs from before 2000 <em>and</em> after 2019 included. I will remove those observations.</p>
+<pre class="r"><code>df &lt;- subset(df_raw, df_raw$year &gt;= 2000 &amp; df_raw$year &lt;= 2019)</code></pre>
+<p><br></p>
+</div>
+<div id="analysis-plan" class="section level2 tabset tabset-fade tabset-pills">
+<h2 class="tabset tabset-fade tabset-pills">Analysis plan</h2>
+<p>Since I have so much data, I’ll want to narrow down my analysis questions for this demo. The main questions I will explore are:</p>
+<!-- Q1 -->
+<p style="text-align: left;">
+<p><a class="fas fa-music" style="color:Black"></a>   Which artists have the most hit songs?</p>
+<!-- Q2 -->
+<p style="text-align: left;">
+<p><a class="fas fa-bolt" style="color:Black"></a>   Are positive songs more energetic and danceable than negative songs?</p>
+<!-- Q3 -->
+<p style="text-align: left;">
+<p><a class="fas fa-chart-line" style="color:Black"></a>   Do songs in major and minor scale change in popularity over time?</p>
+<!-- Q4 -->
+<p style="text-align: left;">
+<p><a class="fas fa-bullhorn" style="color:Black"></a>   Are songs with explicit lyrics speechier than songs without explicit lyrics?</p>
+<!-- Q5 -->
+<p style="text-align: left;">
+<p><a class="fas fa-drum" style="color:Black"></a>   Does song tempo or duration influence song popularity?</p>
+</p>
+<p>Each of these questions will highlight a different data visualization method. In my experience, it can be helpful to test different plotting methods to find the best way to display results.</p>
+<p><br></p>
+<div id="section" class="section level3">
+<h3><svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"> <path d="M470.38 1.51L150.41 96A32 32 0 0 0 128 126.51v261.41A139 139 0 0 0 96 384c-53 0-96 28.66-96 64s43 64 96 64 96-28.66 96-64V214.32l256-75v184.61a138.4 138.4 0 0 0-32-3.93c-53 0-96 28.66-96 64s43 64 96 64 96-28.65 96-64V32a32 32 0 0 0-41.62-30.49z"></path></svg></h3>
+<p><br></p>
+<div id="which-artists-have-the-most-hit-songs" class="section level4">
+<h4><strong>Which artists have the most hit songs?</strong></h4>
+<p>In order to find out which artists have the most hit songs, I need to count the number of songs by every artist in the data frame. I can easily do this using <code>%&gt;%</code> (pipe) notation, which allows me to express a sequence of multiple operations. The pipe comes from the <code>magrittr</code> package, but <code>tidyverse</code> loads it automatically. Pipes allow me to write a step-by-step command that is executed in a certain order.</p>
+<p>Here, I gather the data contained in <code>df</code> and I ultimately want to store it in a new data frame called <code>artists</code>. To do this, I first group all the data by the unique artist name. I know that this is the first step because it’s the first statement that comes after my initial <code>%&gt;%</code>. Then, while grouping the data by artist, I can count the number of songs by grabbing the length of the <code>song</code> variable.</p>
+<p>Finally, I want to see a list of the top ten artists in descending order by the number of songs.</p>
+<p><br></p>
+<pre class="r"><code>artists &lt;- df %&gt;%                      # create new data frame
+  group_by(artist) %&gt;%                 # group by unique artist name
+  summarize(SongCount = length(song))  # count the number of songs
+
+# sort list in descending order of number of songs
+artists &lt;- arrange(artists, desc(SongCount))
+
+# print table of top 10 artists
+reactable(head(artists, n = 10), compact = T)</code></pre>
+<div id="htmlwidget-94fb62aa9b413c255f0f" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-94fb62aa9b413c255f0f">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"artist":["Rihanna","Drake","Eminem","Calvin Harris","Britney Spears","David Guetta","Chris Brown","Kanye West","Beyoncé","Katy Perry"],"SongCount":[25,23,21,20,18,18,17,17,16,16]},"columns":[{"accessor":"artist","name":"artist","type":"character"},{"accessor":"SongCount","name":"SongCount","type":"numeric"}],"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"compact":true,"dataKey":"7cf5eb1a35e349f24dcf69e36a0c070a"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<p><br></p>
+<p>To visualize this information in a plot, I can save this information as a data frame and make a very simple plot using <code>ggplot2</code>.</p>
+<p><br></p>
+<pre class="r"><code># save top ten
+TopTen &lt;- head(artists, n = 10)
+
+ggplot(TopTen, aes(x = artist, y = SongCount)) +
+  # outline bars in black, fill with light teal blue
+  geom_col(color = &quot;black&quot;, fill = &quot;#fcbc66&quot;, alpha = 0.8) +
+  # order bars in descending order and wrap text so last name appears on second line
+  scale_x_discrete(limits = TopTen$artist, labels = function(x) str_wrap(x, width = 10)) +
+  # label x axis
+  xlab(NULL) + 
+  # label y axis
+  ylab(&quot;Number of Hit Songs&quot;) + 
+  # write a descriptive title
+  ggtitle(&quot;Top Ten Artists with Hit Songs on Spotify from 2000 - 2019&quot;) +
+  # add song count value above each bar
+  geom_text(aes(label = SongCount), position = position_dodge(width = 0.9), vjust = -0.5) </code></pre>
+<p><img src="data-vis_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="section-1" class="section level3">
+<h3><svg viewBox="0 0 320 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"> <path d="M296 160H180.6l42.6-129.8C227.2 15 215.7 0 200 0H56C44 0 33.8 8.9 32.2 20.8l-32 240C-1.7 275.2 9.5 288 24 288h118.7L96.6 482.5c-3.6 15.2 8 29.5 23.3 29.5 8.4 0 16.4-4.4 20.8-12l176-304c9.3-15.9-2.2-36-20.7-36z"></path></svg></h3>
+<p><br></p>
+<div id="are-positive-songs-more-energetic-and-danceable-than-negative-songs" class="section level4">
+<h4><strong>Are positive songs more energetic and danceable than negative songs?</strong></h4>
+<p>In order to determine if positive songs are both more energetic and more “danceable” than negative songs, I first want to binarize valence into two categories – positive and negative. The Kaggle dataset mentions that songs with a valence greater than 0.5 are considered more positive, while songs with a valence that is less than 0.5 are considered more negative. With this in mind, I will create a new variable called <code>valence.category</code> that reflects this binary split.</p>
+<p>I also want to get some statistical measures for my plot. Using <code>summarySE</code> from the <code>Rmisc</code> package, I can calculate mean, standard deviation, standard error, and 95% confidence intervals for a measurement variable while grouping by another variable. In this case, I want to calculate these statistical measures for both <code>danceability</code> and <code>energy</code> while grouping by the newly created <code>valence.category</code>.</p>
+<p><br></p>
+<pre class="r"><code># bin valence values into positive and negative categories
+df$valence.category[df$valence &gt;= 0.5] &lt;- &quot;Positive&quot;
+df$valence.category[df$valence &lt; 0.5] &lt;- &quot;Negative&quot;
+
+# get stats for danceability and energy (mean, 95% confidence interval, etc.)
+dance &lt;- summarySE(df, measurevar = &quot;danceability&quot;, groupvars = &quot;valence.category&quot;)
+energy &lt;- summarySE(df, measurevar = &quot;energy&quot;, groupvars = &quot;valence.category&quot;)</code></pre>
+<p><br></p>
+<p>Now I can create my plot! I will be making a violin plot to show not only the mean difference between my valence groups, but also what the distribution is within my two valence categories. I will create a plot for <code>energy</code> and for <code>danceability</code>, and combine those into one joint plot using <code>ggarrange</code>.</p>
+<p><br></p>
+<pre class="r"><code># build violin plot for danceability
+dance.plot &lt;- ggplot(data = df, aes(x = valence.category, y = danceability,
+                                    fill = valence.category, color = valence.category)) +
+  # violin plot
+  geom_violin(scale = &quot;area&quot;, alpha = 0.8) +
+  # fill with my selected colors
+  scale_fill_manual(values = c(&quot;#8dc6bf&quot;,&quot;#fcbc66&quot;)) +
+  scale_color_manual(values = c(&quot;#8dc6bf&quot;,&quot;#fcbc66&quot;)) +
+  # add point for mean of each valence category
+  geom_point(data = dance, aes(x = valence.category, y = danceability), color = &quot;black&quot;) +
+  # add 95% confidence intervals
+  geom_errorbar(data = dance, aes(ymin = danceability-ci, ymax = danceability+ci),
+                width = 0.25, position = &quot;dodge&quot;, color = &quot;black&quot;) +
+  # label x axis
+  xlab(NULL) +
+  # label y axis
+  ylab(&quot;Danceability&quot;) +
+  # don&#39;t include legend
+  theme(legend.position = &quot;none&quot;)
+
+# build violin plot for energy
+energy.plot &lt;- ggplot(data = df, aes(x = valence.category, y = energy,
+                                     fill = valence.category, color = valence.category)) +
+  # violin plot
+  geom_violin(scale = &quot;area&quot;, alpha = 0.8) +
+  # fill with my selected colors
+  scale_fill_manual(values = c(&quot;#8dc6bf&quot;,&quot;#fcbc66&quot;)) +
+  scale_color_manual(values = c(&quot;#8dc6bf&quot;,&quot;#fcbc66&quot;)) +
+  # add point for mean of each valence category
+  geom_point(data = energy, aes(x = valence.category, y = energy), color = &quot;black&quot;) +
+  # add 95% confidence intervals
+  geom_errorbar(data = energy, aes(ymin = energy-ci, ymax = energy+ci),
+                width = 0.25, position = &quot;dodge&quot;, color = &quot;black&quot;) +
+  # label x axis
+  xlab(NULL) +
+  # label y axis
+  ylab(&quot;Energy&quot;) +
+  # don&#39;t include legend
+  theme(legend.position = &quot;none&quot;)
+
+# combine dance plot and energy plot using ggarrange
+plot &lt;- ggarrange(dance.plot, energy.plot, ncol = 2)
+# add title and note to plot
+annotate_figure(plot, top = text_grob(&quot;Danceability and Energy in Positive and Negative Songs&quot;,
+                color = &quot;black&quot;, face = &quot;bold&quot;, size = 14),
+                bottom = text_grob(&quot;Bars indicate 95% confidence intervals around the mean.&quot;,
+                                   color = &quot;black&quot;, face = &quot;italic&quot;, size = 8))</code></pre>
+<p><img src="data-vis_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<p>It looks like positive songs are both more energetic and more danceable than negative songs, which makes sense. Interestingly, negative songs extend to both the lower and higher ends of the energy and danceability scales, while positive songs tend to be more densely clustered toward the higher end of the scales.</p>
+</div>
+</div>
+<div id="section-2" class="section level3">
+<h3><svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"> <path d="M496 384H64V80c0-8.84-7.16-16-16-16H16C7.16 64 0 71.16 0 80v336c0 17.67 14.33 32 32 32h464c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16zM464 96H345.94c-21.38 0-32.09 25.85-16.97 40.97l32.4 32.4L288 242.75l-73.37-73.37c-12.5-12.5-32.76-12.5-45.25 0l-68.69 68.69c-6.25 6.25-6.25 16.38 0 22.63l22.62 22.62c6.25 6.25 16.38 6.25 22.63 0L192 237.25l73.37 73.37c12.5 12.5 32.76 12.5 45.25 0l96-96 32.4 32.4c15.12 15.12 40.97 4.41 40.97-16.97V112c.01-8.84-7.15-16-15.99-16z"></path></svg></h3>
+<p><br></p>
+<div id="do-songs-in-major-and-minor-scale-change-in-popularity-over-time" class="section level4">
+<h4><strong>Do songs in major and minor scale change in popularity over time?</strong></h4>
+<p>Here I’m interested to see if songs that are in major versus minor scale change in popularity over time. The major scale is a more commonly used scale, especially in Western music. On the flip, side the minor scale is used when musicians want to evoke a feeling of eeriness or suspense (some examples include “Stairway to Heaven” by Led Zeppelin and “Scarborough Fair” by Simon &amp; Garfunkel).</p>
+<p>I first need to organize the data and calculate an average popularity score for each scale type (the <code>mode</code> variable) and for each year. Then I will create a new character variable called <code>mode.char</code> that indicates whether the scale is major or minor.</p>
+<p><br></p>
+<pre class="r"><code>popularity &lt;- df %&gt;%
+  group_by(year,mode) %&gt;%
+  summarize(MeanPopularity = mean(popularity))
+
+popularity$mode.char[popularity$mode == 1] &lt;- &quot;Major&quot;
+popularity$mode.char[popularity$mode == 0] &lt;- &quot;Minor&quot;</code></pre>
+<p><br></p>
+<p>Now I can make my plot! Because I’m showing change over time, I decided to use the <code>gganimate</code> package to reveal each data point sequentially on an animated plot.</p>
+<p><br></p>
+<pre class="r"><code># make plot
+plot &lt;- ggplot(popularity, aes(x = year, y = MeanPopularity, group = mode.char)) +
+  # animate to reveal points over time
+  transition_reveal(year) +
+  # add point for each year
+  geom_point(aes(color = mode.char), size = 2) +
+  # connect points with line
+  geom_line(aes(color = mode.char), size = 1.1) +
+  # show all years on the x-axis
+  scale_x_continuous(breaks = pretty_breaks(n=20)) +
+  # label x-axis and y-axis
+  ylab(&quot;Average Popularity&quot;) + xlab(&quot;Year&quot;) +
+  # add a descriptive title
+  ggtitle(&quot;Average Popularity of Major and Minor Songs from 2000 - 2019&quot;) +
+  # use my colors and change legend title
+  scale_color_manual(values = c(&quot;#8dc6bf&quot;,&quot;#fcbc66&quot;), name = &quot;Scale&quot;) +
+  # angle and move x-axis labels and text
+  theme(
+    axis.text.x = element_text(hjust = 1, angle = 45),
+    axis.title.x = element_text(vjust = -1)
+    )
+
+# animate
+animate(plot, duration = 8, fps = 20, renderer = gifski_renderer(), end_pause = 60)</code></pre>
+<p><img src="data-vis_files/figure-html/unnamed-chunk-9-1.gif" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="section-3" class="section level3">
+<h3><svg viewBox="0 0 576 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"> <path d="M576 240c0-23.63-12.95-44.04-32-55.12V32.01C544 23.26 537.02 0 512 0c-7.12 0-14.19 2.38-19.98 7.02l-85.03 68.03C364.28 109.19 310.66 128 256 128H64c-35.35 0-64 28.65-64 64v96c0 35.35 28.65 64 64 64h33.7c-1.39 10.48-2.18 21.14-2.18 32 0 39.77 9.26 77.35 25.56 110.94 5.19 10.69 16.52 17.06 28.4 17.06h74.28c26.05 0 41.69-29.84 25.9-50.56-16.4-21.52-26.15-48.36-26.15-77.44 0-11.11 1.62-21.79 4.41-32H256c54.66 0 108.28 18.81 150.98 52.95l85.03 68.03a32.023 32.023 0 0 0 19.98 7.02c24.92 0 32-22.78 32-32V295.13C563.05 284.04 576 263.63 576 240zm-96 141.42l-33.05-26.44C392.95 311.78 325.12 288 256 288v-96c69.12 0 136.95-23.78 190.95-66.98L480 98.58v282.84z"></path></svg></h3>
+<p><br></p>
+<div id="are-songs-with-explicit-lyrics-speechier-than-songs-without-explicit-lyrics" class="section level4">
+<h4><strong>Are songs with explicit lyrics speechier than songs without explicit lyrics?</strong></h4>
+<p>In this dataset, “speechiness” is a measure of spoken words in a song. Songs with more exclusively speech-like contents (like a talk show, podcast, etc.) have scores between 0.66 and 1. Songs with a speechiness value between 0.33 and 0.66 describe tracks that contain both music and speech. This range is where I’d expect most of these songs within. Finally, songs with values below 0.33 represent instrumental songs and songs with more music than words.</p>
+<p>First, I want to see the range of speechiness values in my dataset to see where songs in this dataset fall.</p>
+<p><br></p>
+<pre class="r"><code># find range of speechiness variable
+min &lt;- min(df$speechiness)
+max &lt;- max(df$speechiness)
+
+# show histogram of speechiness scores
+hist(df$speechiness, col = &quot;#FF6347&quot;, xlab = &quot;Speechiness&quot;, main = &quot;Histogram of Speechiness Values&quot;)</code></pre>
+<p><img src="data-vis_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="r"><code># print range
+paste0(&quot;Speechiness values range from &quot;, min, &quot; to &quot;, max, &quot; in this dataset.&quot;, sep = &quot;&quot;)</code></pre>
+<pre><code>## [1] &quot;Speechiness values range from 0.0232 to 0.576 in this dataset.&quot;</code></pre>
+<p><br></p>
+<p>Interesting! In this dataset, there are actually more songs that have more instrumental music. I wonder if songs that contain more speech <em>also</em> contain more explicit dialogue than songs with less speech. I can investigate this question using a density plot.</p>
+<p><br></p>
+<pre class="r"><code>df$explicit.char[df$explicit == &quot;False&quot;] &lt;- &quot;No&quot;
+df$explicit.char[df$explicit == &quot;True&quot;] &lt;- &quot;Yes&quot;
+
+ggplot(df, aes(speechiness)) +
+  # create density plot to show distribution
+  geom_density(aes(fill = factor(explicit.char)), alpha = 0.8) +
+  # use my colors and rename legend
+  scale_fill_manual(values = c(&quot;#8dc6bf&quot;,&quot;#fcbc66&quot;), name = &quot;Explicit Lyrics&quot;) +
+  # label x-axis and y-axis
+  ylab(&quot;Density&quot;) + xlab(&quot;Average Track Speechiness&quot;) +
+  # add a descriptive title
+  ggtitle(&quot;Average Speechiness of Songs With and Without Explicit Lyrics&quot;)</code></pre>
+<p><img src="data-vis_files/figure-html/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<p>From the density plot, we see that yes, songs with more speech and music tend to have more explicit language than songs with less speech!</p>
+</div>
+</div>
+<div id="section-4" class="section level3">
+<h3><svg viewBox="0 0 512 512" style="height:1em;position:relative;display:inline-block;top:.1em;" xmlns="http://www.w3.org/2000/svg"> <path d="M431.34 122.05l73.53-47.42a16 16 0 0 0 4.44-22.19l-8.87-13.31a16 16 0 0 0-22.19-4.44l-110.06 71C318.43 96.91 271.22 96 256 96 219.55 96 0 100.55 0 208.15v160.23c0 30.27 27.5 57.68 72 77.86v-101.9a24 24 0 1 1 48 0v118.93c33.05 9.11 71.07 15.06 112 16.73V376.39a24 24 0 1 1 48 0V480c40.93-1.67 78.95-7.62 112-16.73V344.34a24 24 0 1 1 48 0v101.9c44.5-20.18 72-47.59 72-77.86V208.15c0-43.32-35.76-69.76-80.66-86.1zM256 272.24c-114.88 0-208-28.69-208-64.09s93.12-64.08 208-64.08c17.15 0 33.73.71 49.68 1.91l-72.81 47a16 16 0 0 0-4.43 22.19l8.87 13.31a16 16 0 0 0 22.19 4.44l118.64-76.52C430.09 168 464 186.84 464 208.15c0 35.4-93.13 64.09-208 64.09z"></path></svg></h3>
+<p><br></p>
+<div id="does-song-tempo-or-duration-influence-song-popularity" class="section level4">
+<h4><strong>Does song tempo or duration influence song popularity?</strong></h4>
+<p>Finally, I want to investigate if there is a relationship between song tempo and song popularity or between song duration and song popularity. To do this, I’m going to run two simple linear regressions using base R’s <code>lm</code> function. I want to see if song tempo (independent, predictor variable) influences song popularity (dependent, response variable). I also want to see if song duration in minutes influences song popularity.</p>
+<p><br></p>
+<pre class="r"><code># does song tempo influence popularity?
+ggplot(df, aes(x = tempo, y = popularity)) +
+  # show data points
+  geom_jitter(size = 1, shape = 1) +
+  # draw regression line
+  geom_smooth(method = &quot;lm&quot;, color = &quot;#8dc6bf&quot;, fill = &quot;#8dc6bf&quot;) +
+  # label x-axis and y-axis
+  xlab(&quot;Tempo (Beats Per Minute)&quot;) + ylab(&quot;Average Popularity&quot;)</code></pre>
+<p><img src="data-vis_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># run a linear regression
+model1 &lt;- lm(popularity ~ tempo, data = df)
+summary(model1)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = popularity ~ tempo, data = df)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -60.668  -3.518   5.860  13.439  29.151 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 58.47742    2.21991  26.342   &lt;2e-16 ***
+## tempo        0.01106    0.01804   0.613     0.54    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 21.51 on 1956 degrees of freedom
+## Multiple R-squared:  0.0001921,  Adjusted R-squared:  -0.000319 
+## F-statistic: 0.3759 on 1 and 1956 DF,  p-value: 0.5399</code></pre>
+<p><br></p>
+<p>Based on the regression results, there does not appear to be an effect of song tempo on popularity (p = .54).</p>
+<p><br></p>
+<pre class="r"><code># calculate song duration in minutes
+df$duration_min &lt;- df$duration_ms/60000
+
+# does song duration influence popularity?
+ggplot(df, aes(x = duration_min, y = popularity)) +
+  # show data points
+  geom_jitter(size = 1, shape = 1) +
+  # draw regression line
+  geom_smooth(method = &quot;lm&quot;, color = &quot;#fcbc66&quot;, fill = &quot;#fcbc66&quot;) +
+  # label x-axis and y-axis
+  xlab(&quot;Song Duration (Minutes)&quot;) + ylab(&quot;Average Popularity&quot;)</code></pre>
+<p><img src="data-vis_files/figure-html/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># run a linear regression
+model2 &lt;- lm(popularity ~ duration_min, data = df)
+summary(model2)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = popularity ~ duration_min, data = df)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -61.951  -3.755   5.791  13.531  28.854 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   53.3904     2.8842  18.511   &lt;2e-16 ***
+## duration_min   1.6860     0.7472   2.256   0.0242 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 21.49 on 1956 degrees of freedom
+## Multiple R-squared:  0.002596,   Adjusted R-squared:  0.002086 
+## F-statistic: 5.091 on 1 and 1956 DF,  p-value: 0.02416</code></pre>
+<p><br></p>
+<p>Based on the regression results, there is a significant effect of song duration on popularity (p = .024). As songs get longer, they increase in popularity.</p>
+</div>
+</div>
+</div>
+<div id="section-5" class="section level2 unnumbered">
+<h2 class="unnumbered"></h2>
+<p><a href="#top" style="color:Tomato">Back to top</a></p>
+<p><font size="4"></p>
+  <!-- add line to divide content from footer -->
+<hr />
+<p style="text-align: center;">
+© 2022 Helen Schmidt
+</p>
+<!-- Add icon library -->
+<p><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></p>
+<p><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"></p>
+<p><link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css"></p>
+<p><font size="6"></p>
+<!-- Add icons from font awesome -->
+<p style="text-align: center;">
+<a href="https://twitter.com/_helenschmidt_" target="_blank" class="fab fa-twitter" style="color:Tomato"></a> <a href="https://github.com/hschmidt12" target="_blank" class="fab fa-github" style="color:Tomato"></a>
+</p>
+<p></font></p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

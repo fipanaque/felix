@@ -1,9 +1,10 @@
 ---
 title: "Helen Schmidt"
 output:
-  html_document:
+  html_document: 
     includes:
-      after_body: "footer.html"
+      after_body: footer.html
+    theme: cosmo
 ---
 
 ```{r pressure, echo=FALSE, out.width = '375px', out.extra='style="float:left; padding:40px"'}
@@ -21,7 +22,6 @@ My CV is available [here](files/SchmidtCV-Website.pdf){target="_blank" style="co
 
 </font>
 
-<br>
 <br>
 <br>
 <br>

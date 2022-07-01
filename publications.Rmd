@@ -1,9 +1,10 @@
 ---
 title: "Publications and Selected Presentations"
 output:
-  html_document:
+  html_document: 
     includes:
-      after_body: "footer.html"
+      after_body: footer.html
+    theme: cosmo
 ---
 
 <br>
