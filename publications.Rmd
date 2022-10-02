@@ -9,17 +9,17 @@ output:
 
 <br>
 
-## Papers in Preparation
+## Manuscripts in Preparation / Under Review
 <font size="2">
 + *denotes equal contribution*
 </font>
 
 <font size="3.5">
-**Schmidt, H.**, Tran, S., & Helion, C. (in preparation). *Conversational linguistic features that inform social network learning.* 
+**Schmidt, H.^+^**, Tran, S.^+^, Medaglia, J., Ulichney, V., & Helion, C. (2022). *Conversational linguistic features predict social network learning.* 
 
-**Schmidt, H.** & Ritchey, M. (in preparation). *Enhancing memory for emotional events with retrieval cueing and retrieval practice.*
+Mitchell, W.J., Stasiak, J., Martinez, S.A., Cliver, K., Gregory, D.F., Reisman, S., **Schmidt, H.**, Murty, V.P., & Helion, C. (2022). *Emotional intensity failed to predict spontaneous regulation strategy usage in a naturalistic paradigm.*
 
-**Schmidt, H.^+^**, Cooper, R. A.^+^, & Ritchey, M. (in preparation). *Temporal dynamics supporting the multidimensional qualities of episodic memory.*
+**Schmidt, H.^+^**, Cooper, R.A.^+^, & Ritchey, M. (2021). *Temporal dynamics supporting the multidimensional qualities of episodic memory.*
 
 </font>
 <br>

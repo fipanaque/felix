@@ -37,11 +37,11 @@ First, I will load the packages I need. If you do not already have tidyverse pac
 ```{r warning=F, message=F}
 library(ggpubr)                 # ggplot customization
 library(Rmisc)                  # basic statistics helper
-library(tidyverse)              # load all tidyverse packages
 library(reactable)              # format tables in a nice way
 library(gganimate)              # animate plots
 library(scales)                 # ggplot scale customization
 library(icons)                  # icon library
+library(tidyverse)              # load all tidyverse packages
 theme_set(theme_classic())      # set classic theme
 ```
 
