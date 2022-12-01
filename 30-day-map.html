@@ -11,7 +11,7 @@
 
 
 
-<title>Selected Poster Presentations</title>
+<title>30 Day Map Challenge 2022</title>
 
 <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -272,22 +272,153 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Selected Poster Presentations</h1>
+<h1 class="title toc-ignore">30 Day Map Challenge 2022</h1>
 
 </div>
 
 
 <p><br></p>
-<p><font size="3.5"> <strong>Schmidt, H.</strong>, Tran, S., &amp; Helion, C. (2022, May). <em>Conversational linguistic features that inform social network learning.</em> Poster presented at the Philadelphia Decision Neuroscience Symposium, Philadelphia, PA. <a href="files/Schmidt_PDNS2022.pdf" target="_blank" style="color:Tomato">PDF</a><br />
-<br />
-<strong>Schmidt, H.</strong> &amp; Ritchey, M. (2020, August). <em>The protective effects of retrieval practice on positive memories.</em> Poster presented at the Context and Episodic Memory Symposium, virtual. <a href="files/Schmidt_CEMS2020.pdf" target="_blank" style="color:Tomato">PDF</a><br />
-<br />
-<strong>Schmidt, H.</strong>, Cooper, R. A., &amp; Ritchey, M. (2020, May). <em>Temporal dynamics supporting the multidimensional quality of episodic memory.</em> Poster presented at the Cognitive Neuroscience Society Annual Meeting, virtual. <a href="files/Schmidt_CNS2020.pdf" target="_blank" style="color:Tomato">PDF</a><br />
-<br />
-<strong>Schmidt, H.</strong>, Samide, R., Cooper, R. A., &amp; Ritchey, M. (2019, May). <em>News flash! Investigating the dynamics of emotional memory using real-life event videos.</em> Poster presented at the Context and Episodic Memory Symposium, Philadelphia, PA. <a href="files/Schmidt_CEMS2019.pdf" target="_blank" style="color:Tomato">PDF</a><br />
-<br />
-Distefano, D., <strong>Schmidt, H.</strong>, Hickey, P., &amp; Race, E. (2018, May). <em>Characterizing EEG signatures of inattention that predict forgetting.</em> Poster presented at the Cognitive Neuroscience Society Annual Meeting, Boston, MA. <a href="files/Schmidt_CNS2018.pdf" target="_blank" style="color:Tomato">PDF</a></p>
-<p></font></p>
+<p>In November 2022, I took part in the <a href="https://30daymapchallenge.com/" style="color:Tomato">#30DayMapChallenge</a>, a month-long challenge to create original geospatial maps. Each day presented a new theme, and I used R to create all my maps around these themes. This was a fun experience, and I learned so much about working with geospatial data in R! I’ve included all my maps, along with a brief description of the data used for each map, below! All maps and corresponding code can be found on my <a href="https://github.com/hschmidt12/30DayMapChallenge-2022" style="color:Tomato">GitHub</a>.</p>
+<hr />
+<div id="points" class="section level3">
+<h3>1. Points</h3>
+<p>Locations of business establishments with a restaurant license in Philadelphia.</p>
+<p><strong>Data:</strong> Philadelphia base map and license data - OpenDataPhilly</p>
+<p><img src="images/day1_points.jpeg" width="400px" /></p>
+<hr />
+</div>
+<div id="lines" class="section level3">
+<h3>2. Lines</h3>
+<p>Nonstop domestic flights originating at Philadelphia International Airport (PHL).</p>
+<p><strong>Data:</strong> Flight and airport data from <code>anyflights</code> R package</p>
+<p><img src="images/day2_lines.jpeg" width="400px" /></p>
+<hr />
+</div>
+<div id="polygons" class="section level3">
+<h3>3. Polygons</h3>
+<p>Number of Dunkin’ locations in Massachusetts counties.</p>
+<p><strong>Data:</strong> Location data pulled from Dunkin’ website</p>
+<p><img src="images/day3_polygons.jpeg" width="400px" /></p>
+<hr />
+</div>
+<div id="color-friday---green" class="section level3">
+<h3>4. Color Friday - Green</h3>
+<p>Heritage trees that are exclusively native to Ireland planted across the country.</p>
+<p><strong>Data:</strong> Ireland National Biodiversity dataset | accessed via data.gov.iv (survey conducted in 2009)</p>
+<p><img src="images/day4_colorfriday_green.jpeg" width="400px" /></p>
+<hr />
+</div>
+<div id="ukraine" class="section level3">
+<h3>5. Ukraine</h3>
+<p>Topographic elevation map of Ukraine.</p>
+<p><strong>Data:</strong> Elevation data queried using <code>elevatr</code> R package</p>
+<p><img src="images/day5_ukraine.jpeg" width="400px" /></p>
+<hr />
+</div>
+<div id="network" class="section level3">
+<h3>6. Network</h3>
+<p>Station ridership throughout the day across the Boston MBTA subway network.</p>
+<p><strong>Data:</strong> Station ridership by time period data obtained from MBTA Massachusetts Department of Transportation open data portal</p>
+<p><img src="images/day6_network.gif" width="400px" /></p>
+<hr />
+</div>
+<div id="raster" class="section level3">
+<h3>7. Raster</h3>
+<p>Topographic elevation map of Connecticut.</p>
+<p><strong>Data:</strong> Elevation data queried using <code>elevatr</code> R package</p>
+<p><img src="images/day7_raster.jpeg" width="400px" /></p>
+<hr />
+</div>
+<div id="open-street-map" class="section level3">
+<h3>8. Open Street Map</h3>
+<p>Streets of central London.</p>
+<p><strong>Data:</strong> Streets queried using <code>osmdata</code> R package for accessing OpenStreetMap data</p>
+<p><img src="images/day8_openstreetmap.jpeg" width="400px" /></p>
+<hr />
+</div>
+<div id="space" class="section level3">
+<h3>9. Space</h3>
+<p>Population in U.S. cities plotted as though viewing lights from space.</p>
+<p><strong>Data:</strong> City locations and corresponding populations accessed via ArcGIS Hub</p>
+<p><img src="images/day9_space.jpeg" width="400px" /></p>
+<hr />
+</div>
+<div id="color-friday---red" class="section level3">
+<h3>11. Color Friday - Red</h3>
+<p>Percent of population with each blood type across the world.</p>
+<p><strong>Data:</strong> Blood type by country data from World Population Review</p>
+<p><img src="images/day11_colorfriday_red.gif" width="400px" /></p>
+<hr />
+</div>
+<div id="hexagons" class="section level3">
+<h3>14. Hexagons</h3>
+<p>Popularity of the search term “hexagon” on Google for each U.S. state.</p>
+<p><strong>Data:</strong> Google trends</p>
+<p><img src="images/day14_hexagons.jpeg" width="400px" /></p>
+<hr />
+</div>
+<div id="fooddrink" class="section level3">
+<h3>15. Food/Drink</h3>
+<p>Average annual consumption of coffee in Scandinavia and the Baltic States, measured in thousands of 60-kg bags of coffee.</p>
+<p><strong>Data:</strong> International Coffee Organization</p>
+<p><img src="images/day15_food-drink.jpeg" width="400px" /></p>
+<hr />
+</div>
+<div id="minimal" class="section level3">
+<h3>16. Minimal</h3>
+<p>A minimal street map of the medieval old town in Tallinn, Estonia.</p>
+<p><strong>Data:</strong> Streets queried using <code>osmdata</code> R package for accessing OpenStreetMap data</p>
+<p><img src="images/day16_minimal.jpeg" width="400px" /></p>
+<hr />
+</div>
+<div id="color-friday---blue" class="section level3">
+<h3>18. Color Friday - Blue</h3>
+<p>Rivers in Iceland.</p>
+<p><strong>Data:</strong> Rivers queried using <code>osmdata</code> R package for accessing OpenStreetMap data</p>
+<p><img src="images/day18_colorfriday_blue.jpeg" width="400px" /></p>
+<hr />
+</div>
+<div id="movement" class="section level3">
+<h3>23. Movement</h3>
+<p>Movement of whale sharks in the Gulf of Mexico.</p>
+<p><strong>Data:</strong> Whale shark movement data from movebank.org</p>
+<p><img src="images/day23_movement.jpeg" width="400px" /></p>
+<hr />
+</div>
+<div id="color-friday---two-colors" class="section level3">
+<h3>25. Color Friday - Two Colors</h3>
+<p>Mapping designated green space in Singapore, which has been nicknamed the Garden City!</p>
+<p><strong>Data:</strong> Green spaces queried using <code>osmdata</code> R package for accessing OpenStreetMap data</p>
+<p><img src="images/day25_colorfriday_twocolors.jpeg" width="400px" /></p>
+<hr />
+</div>
+<div id="island" class="section level3">
+<h3>26. Island</h3>
+<p>My first <code>rayshader</code> adventure, plotting elevation on the islands of Maui and Kaho’olawe.</p>
+<p><strong>Data:</strong> Elevation data queried using <code>elevatr</code> R package</p>
+<p><img src="images/day26_island.png" width="400px" /></p>
+<hr />
+</div>
+<div id="music" class="section level3">
+<h3>27. Music</h3>
+<p>Venues with live entertainment permits in New Orleans, Louisiana.</p>
+<p><strong>Data:</strong> Venue location data from City of New Orleans Open Data</p>
+<p><img src="images/day27_music.jpeg" width="400px" /></p>
+<hr />
+</div>
+<div id="d" class="section level3">
+<h3>28. 3D</h3>
+<p>Using <code>rayshader</code> to plot Aurlandsfjord in Norway.</p>
+<p><strong>Data:</strong> Elevation data queried using <code>elevatr</code> R package</p>
+<p><img src="images/day28_3D.png" width="400px" /></p>
+<hr />
+</div>
+<div id="remix" class="section level3">
+<h3>30. Remix</h3>
+<p>A remix of my network map from day 6, mapping the Boston MBTA subway network using Open Street Map.</p>
+<p><strong>Data:</strong> Subway routes and streets queried using <code>osmdata</code> R package for accessing OpenStreetMap data</p>
+<p><img src="images/day30_remix.jpeg" width="400px" /></p>
+</div>
 
 <!DOCTYPE html>
 

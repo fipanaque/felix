@@ -10,18 +10,18 @@ output:
 <br>
 
 <font size="3.5">
-**Schmidt, H.**, Tran, S., & Helion, C. (2022, May). *Conversational linguistic features that inform social network learning.* Poster presented at the Philadelphia Decision Neuroscience Symposium, Philadelphia, PA. [PDF link](files/Schmidt_PDNS2022.pdf){target="_blank" style="color:Tomato"}
+**Schmidt, H.**, Tran, S., & Helion, C. (2022, May). *Conversational linguistic features that inform social network learning.* Poster presented at the Philadelphia Decision Neuroscience Symposium, Philadelphia, PA. [PDF](files/Schmidt_PDNS2022.pdf){target="_blank" style="color:Tomato"}
 \
 \
-**Schmidt, H.** & Ritchey, M. (2020, August). *The protective effects of retrieval practice on positive memories.* Poster presented at the Context and Episodic Memory Symposium, virtual. [PDF link](files/Schmidt_CEMS2020.pdf){target="_blank" style="color:Tomato"}
+**Schmidt, H.** & Ritchey, M. (2020, August). *The protective effects of retrieval practice on positive memories.* Poster presented at the Context and Episodic Memory Symposium, virtual. [PDF](files/Schmidt_CEMS2020.pdf){target="_blank" style="color:Tomato"}
 \
 \
-**Schmidt, H.**, Cooper, R. A., & Ritchey, M. (2020, May). *Temporal dynamics supporting the multidimensional quality of episodic memory.* Poster presented at the Cognitive Neuroscience Society Annual Meeting, virtual. [PDF link](files/Schmidt_CNS2020.pdf){target="_blank" style="color:Tomato"}
+**Schmidt, H.**, Cooper, R. A., & Ritchey, M. (2020, May). *Temporal dynamics supporting the multidimensional quality of episodic memory.* Poster presented at the Cognitive Neuroscience Society Annual Meeting, virtual. [PDF](files/Schmidt_CNS2020.pdf){target="_blank" style="color:Tomato"}
 \
 \
-**Schmidt, H.**, Samide, R., Cooper, R. A., & Ritchey, M. (2019, May). *News flash! Investigating the dynamics of emotional memory using real-life event videos.* Poster presented at the Context and Episodic Memory Symposium, Philadelphia, PA. [PDF link](files/Schmidt_CEMS2019.pdf){target="_blank" style="color:Tomato"}
+**Schmidt, H.**, Samide, R., Cooper, R. A., & Ritchey, M. (2019, May). *News flash! Investigating the dynamics of emotional memory using real-life event videos.* Poster presented at the Context and Episodic Memory Symposium, Philadelphia, PA. [PDF](files/Schmidt_CEMS2019.pdf){target="_blank" style="color:Tomato"}
 \
 \
-Distefano, D., **Schmidt, H.**, Hickey, P., & Race, E. (2018, May). *Characterizing EEG signatures of inattention that predict forgetting.* Poster presented at the Cognitive Neuroscience Society Annual Meeting, Boston, MA. [PDF link](files/Schmidt_CNS2018.pdf){target="_blank" style="color:Tomato"}
+Distefano, D., **Schmidt, H.**, Hickey, P., & Race, E. (2018, May). *Characterizing EEG signatures of inattention that predict forgetting.* Poster presented at the Cognitive Neuroscience Society Annual Meeting, Boston, MA. [PDF](files/Schmidt_CNS2018.pdf){target="_blank" style="color:Tomato"}
 
 </font>

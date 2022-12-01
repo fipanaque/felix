@@ -17,7 +17,7 @@ output:
 <font size="3.5">
 **Schmidt, H.^+^**, Tran, S.^+#^, Medaglia, J., Ulichney, V., & Helion, C. (2022). [Conversational linguistic features predict social network learning.](https://psyarxiv.com/fn4my/){target="_blank" style="color:Tomato"} *Under Review*. &nbsp; <a href="https://osf.io/8wqhb/" target="_blank" class="fas fa-code" style="color:Tomato"></a> &nbsp; <a href="https://github.com/hschmidt12/NLP-Social-Network-Learning" target="_blank" class="fab fa-github" style="color:Tomato"></a> 
 
-Mitchell, W.J., Stasiak, J., Martinez, S.A., Cliver, K., Gregory, D.F., Reisman, S., **Schmidt, H.**, Murty, V.P., & Helion, C. (2022). [Emotional intensity failed to predict spontaneous regulation strategy usage in a naturalistic paradigm.](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Iw0DI-IAAAAJ&citation_for_view=Iw0DI-IAAAAJ:u-x6o8ySG0sC){target="_blank" style="color:Tomato"} *Under Review*. &nbsp; <a href="https://osf.io/j5sku/?view_only=" target="_blank" class="fas fa-code" style="color:Tomato"></a>
+Mitchell, W.J., Stasiak, J., Martinez, S.A., Cliver, K., Gregory, D.F., Reisman, S., **Schmidt, H.**, Murty, V.P., & Helion, C. (2022). [Emotion regulation strategy usage in a quasi-naturalistic context.](https://psyarxiv.com/23wtz/){target="_blank" style="color:Tomato"} *Under Review*. &nbsp; <a href="https://osf.io/j5sku/?view_only=" target="_blank" class="fas fa-code" style="color:Tomato"></a>
 
 **Schmidt, H.^+^**, Cooper, R.A.^+^, & Ritchey, M. (2021). Temporal dynamics supporting the multidimensional qualities of episodic memory. *In Preparation*.
 

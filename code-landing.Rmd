@@ -17,6 +17,12 @@ output:
 
 <font size="4">
 
+<!-- 30 day map challenge -->
+<p style="text-align: left;">
+    <a class="far fa-map" style="color:Black"></a> &emsp; [30 Day Map Challenge](30-day-map.html){style="color:Tomato"}
+
+<br>
+
 <!-- pretty ggplots -->
 <p style="text-align: left;"> 
     <a class="fas fa-chart-line" style="color:Black"></a> &emsp; [Data visualizations using `dplyr` and `ggplot2`](data-vis.html){style="color:Tomato"}
@@ -30,7 +36,6 @@ output:
 <br>
 
 <!-- making maps with coffee -->
-
 <p style="text-align: left;"> 
     <a class="fas fa-globe" style="color:Black"></a> &emsp; [Creating Maps And Mapping Geospatial Data in R](coffee-maps.html){style="color:Tomato"}
 
