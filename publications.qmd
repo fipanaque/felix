@@ -1,0 +1,58 @@
+---
+title: "Publications"
+---
+
+<!-- <font size="2.5"> {{< fa solid code >}} Open Science Framework       {{< fa brands github >}} GitHub       {{< fa regular file >}} Manuscript </font> -->
+
+## Manuscripts Under Review / Preprints
+
+<font size="2.5"> *+ denotes equal contribution*       *\# denotes trainee* </font>
+
+Ulichney, V., **Schmidt, H.**, & Helion, C.
+(under review).
+Maybe the real prize is the friends we made along the way: Perceived support from friends enhances everyday emotional well-being in the U.S. and Japan.
+Under review at *Personality and Social Psychology Bulletin*, June 14, 2023.
+<a href="https://osf.io/f4kav/" class="fa-solid fa-code" target="_blank" style="text-decoration:none" ></a> <a href="https://psyarxiv.com/agc3v" class="fa-regular fa-file" target="_blank" style="text-decoration:none" ></a>
+
+\
+Eckardt, D., Helion, C., **Schmidt, H.**, Chen, J., & Murty, V.P.
+(under review).
+Storytelling changes the structure and perceived value of event memories.
+Under review at *Cognition*, May 31, 2023.
+
+\
+**Schmidt, H.^+^***,* Tran, S.^+#^, Medaglia, J., Ulichney, V., & Helion, C.
+(under review).
+Conversational linguistic features predict social network learning.
+Under review at *Psychonomic Bulletin & Review*, May 15, 2023.
+<a href="https://osf.io/8wqhb/" class="fa-solid fa-code" target="_blank" style="text-decoration:none" ></a> <a href="https://psyarxiv.com/fn4my/" class="fa-regular fa-file" target="_blank" style="text-decoration:none" ></a>
+
+\
+Mitchell, W.J., Stasiak, J., Martinez, S.A., Cliver, K., Gregory, D.F., Reisman, S., **Schmidt, H**., Murty, V.P., & Helion, C.
+(preprint).
+Emotion regulation strategy usage in a dynamic, high-intensity context.
+<a href="https://osf.io/j5sku/" target="_blank" class="fa-solid fa-code" style ="text-decoration:none" ></a> <a href="https://psyarxiv.com/23wtz/" class="fa-regular fa-file" target="_blank" style="text-decoration:none" ></a>
+
+## Manuscripts In Preparation
+
+**Schmidt, H.** & Helion, C.
+(in prep.).
+Quantitative methods in affective science: Recent advances, theoretical implications, and future directions.
+
+\
+**Schmidt, H.**, Mitchell, W.J., & Helion, C.
+(in prep.).
+Emotion regulatory effects of emotion and content labeling in a naturalistic context.
+
+## Selected Poster Presentations
+
+Click [here](selected-posters.qmd){target="_blank" style="text-decoration:none"} to see a selection of my poster presentations.
+All presentations are listed on my [CV](files/SchmidtCV-Website.pdf){target="_blank" style="text-decoration:none"}.
+
+<!-- Add icon library -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">

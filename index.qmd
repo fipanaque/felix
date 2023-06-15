@@ -1,0 +1,22 @@
+---
+title: "Helen Schmidt"
+format: 
+  html:
+    page-layout: full
+---
+
+<br>
+
+::: grid
+::: g-col-4
+```{r, echo=FALSE, out.width = '300px', out.height = '300px'}
+knitr::include_graphics("images/helen-schmidt-website.png")
+```
+:::
+
+::: g-col-8
+I am a Social Psychology & Quantitative Methods PhD student who studies emotion and language in social contexts using behavioral, computational, and neuroimaging methods.
+<br> I work with Dr. Chelsea Helion in the Social and Affective Neuroscience Lab at Temple University in Philadelphia.
+<br> <br> My CV is available [here](files/SchmidtCV-Website.pdf).
+:::
+:::

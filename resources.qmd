@@ -1,0 +1,28 @@
+---
+title: "Resources"
+---
+
+<!-- <font size="2.5"> {{< fa solid square-arrow-up-right >}} External Link </font> -->
+
+## Applying to PhD programs in psychology
+
+-   "How applying to graduate school works" - the Sokol-Hessner Lab <a href="https://www.sokolhessnerlab.com/howapplyingworks" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none" ></a>
+-   Harvard Psychology's PhD Resources and Online Tips <a href="https://psychology.fas.harvard.edu/pro-tip" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none" ></a>
+-   "Mitch's Uncensored Advice for Applying to Graduate School in Clinical Psychology" - Mitch Prinstein (useful for both clinical and non-clinical programs) <a href="https://mitch.web.unc.edu/wp-content/uploads/sites/4922/2017/02/MitchGradSchoolAdvice.pdf" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none" ></a>
+-   Temple University's Doctoral Program in Psychology & Neuroscience <a href="https://www.temple.edu/academics/degree-programs/psychology-phd-la-psy-phd" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none" ></a>
+-   Application Statement Feedback Program <a href="https://www.asfp.io/" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none" ></a>
+    -   *Disclaimer: I volunteer as an editor for ASFP.*
+
+## Professional development
+
+-   Creating a simple and effective academic personal website <a href="https://www.elsevier.com/connect/creating-a-simple-and-effective-academic-personal-website" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none" ></a>
+-   American Psychological Association - Tips for Determining Authorship Credit <a href="https://www.apa.org/science/leadership/students/authorship-paper" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none" ></a>
+
+<!-- Add icon library -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+

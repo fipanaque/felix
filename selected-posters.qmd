@@ -1,0 +1,39 @@
+---
+title: "Selected Poster Presentations"
+---
+
+<font size="2.5"> {{< fa regular file-pdf >}} Poster PDF        *# denotes trainee* </font>
+
+## 2023
+
+Cunningham, R.M., Quarmley, M., Calderaro, M., Clarkson, T., **Schmidt, H.**, Cassidy, C.M., & Jarcho, J.M. (April). *Relations between neuromelanin in substantia nigra and peer-based aggression in adolescents are potentiated by irritability.* Poster presented at the Social and Affective Neuroscience Society Annual Meeting, Santa Barbara, CA.
+
+Osuntokun, M.^\#^, **Schmidt, H.**, & Helion, C. (April). *Can linguistic aspects predict relationship formation and future outcomes?* Poster presented at the Temple University Psychology Honors Poster Session, Philadelphia, PA.
+
+Martinez, S.A., Cliver, K., Mitchell, W.J., **Schmidt, H.**, Helion, C., Chein, J., & Murty, V.P. (March). *Linguistic cues of memory accuracy differ for low-threat and high-threat memories.* Poster presented at the Cognitive Neuroscience Society Annual Meeting, San Francisco, CA.
+
+**Schmidt, H.** & Helion, C. (March). *Emotion regulatory effects of emotion and content labeling in a naturalistic context.* Poster presented at the Society for Affective Science Annual Conference, Long Beach, CA.
+<a href=files/Schmidt_SAS2023.pdf class="fa-regular fa-file-pdf" target="_blank" style="text-decoration:none" ></a> 
+
+**Schmidt, H.**, Tran, S.^\#^, & Helion, C. (February). *Conversations predict social network learning.* Poster presented at the Society for Personality and Social Psychology Annual Convention, Atlanta, GA. <a href=files/Schmidt_SPSP2023.pdf class="fa-regular fa-file-pdf" target="_blank" style="text-decoration:none" ></a> 
+
+## 2022
+
+Eckardt, D., Helion, C., **Schmidt, H.**, Chen, J., & Murty, V.P. (November). *What makes a story: Uncovering mechanisms of memory communication.* Poster presented at the Psychonomic Society Annual Meeting, Boston, MA.
+
+**Schmidt, H.**, Tran, S.^\#^, & Helion, C. (May). *Conversational linguistic features that inform social network learning.* Poster presented at the Philadelphia Decision Neuroscience Symposium, Philadelphia, PA. <a href=files/Schmidt_PDNS2022.pdf class="fa-regular fa-file-pdf" target="_blank" style="text-decoration:none" ></a>
+
+## 2020
+
+**Schmidt, H.** & Ritchey, M. (August). *The protective effects of retrieval practice on positive memories.* Poster presented virtually at the Context and Episodic Memory Symposium. <a href=files/Schmidt_CEMS2020.pdf class="fa-regular fa-file-pdf" target="_blank" style="text-decoration:none" ></a>
+
+**Schmidt, H.**, Cooper, R.A., & Ritchey, M. (May). *Temporal dynamics supporting the multidimensional quality of episodic memory.* Poster presented virtually at the Cognitive Neuroscience Society Annual Meeting. <a href=files/Schmidt_CNS2020.pdf class="fa-regular fa-file-pdf" target="_blank" style="text-decoration:none" ></a>
+
+## 2019
+
+**Schmidt, H.**, Samide, R., Cooper, R.A., & Ritchey, M. (May). *News flash! Investigating the dynamics of emotional memory using real-life event videos.* Poster presented at the Context and Episodic Memory Symposium, Philadelphia, PA. <a href=files/Schmidt_CEMS2019.pdf class="fa-regular fa-file-pdf" target="_blank" style="text-decoration:none" ></a>
+
+## 2018
+
+Distefano, D., **Schmidt, H.**, Hickey, P., & Race, E. (March). *Characterizing EEG signatures of inattention that predict forgetting.* Poster presented at the Cognitive Neuroscience Society Annual Meeting, Boston, MA. <a href=files/Schmidt_CNS2018.pdf class="fa-regular fa-file-pdf" target="_blank" style="text-decoration:none" ></a>
+
