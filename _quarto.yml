@@ -1,5 +1,6 @@
 project:
   type: website
+  output-dir: docs
   render: 
     - index.qmd
     - about.qmd
@@ -18,7 +19,7 @@ website:
       #- href: portafolio.qmd
       #  text: portafolio
       - href: publications.qmd
-        text: Events & Talks
+        text: Events & Talks 
       - href: resources.qmd
         text: Resources
 
