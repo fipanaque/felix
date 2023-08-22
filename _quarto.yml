@@ -1,27 +1,32 @@
 project:
   type: website
-  output-dir: docs
-
+  render: 
+    - index.qmd
+    - about.qmd
+    - '!portafolio.qmd'
+    - publications.qmd
+    - resources.qmd
+  
 website:
-  title: "Helen Schmidt"
+  title: "Felix Ipanaque"
   navbar:
     right:
       - href: index.qmd
         text: Home
       - href: about.qmd
         text: About
+      #- href: portafolio.qmd
+      #  text: portafolio
       - href: publications.qmd
-        text: Publications
-      - href: portfolio.qmd
-        text: Portfolio
+        text: Events & Talks
       - href: resources.qmd
         text: Resources
 
 format:
   html:
     theme: 
-      light: flatly
-      dark: darkly
+      light: spacelab
+      dark: solar
     css: styles.css
     toc: true
     

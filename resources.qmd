@@ -4,19 +4,32 @@ title: "Resources"
 
 <!-- <font size="2.5"> {{< fa solid square-arrow-up-right >}} External Link </font> -->
 
-## Applying to PhD programs in psychology
+## Sleep Sciences
 
--   "How applying to graduate school works" - the Sokol-Hessner Lab <a href="https://www.sokolhessnerlab.com/howapplyingworks" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none" ></a>
--   Harvard Psychology's PhD Resources and Online Tips <a href="https://psychology.fas.harvard.edu/pro-tip" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none" ></a>
--   "Mitch's Uncensored Advice for Applying to Graduate School in Clinical Psychology" - Mitch Prinstein (useful for both clinical and non-clinical programs) <a href="https://mitch.web.unc.edu/wp-content/uploads/sites/4922/2017/02/MitchGradSchoolAdvice.pdf" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none" ></a>
--   Temple University's Doctoral Program in Psychology & Neuroscience <a href="https://www.temple.edu/academics/degree-programs/psychology-phd-la-psy-phd" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none" ></a>
--   Application Statement Feedback Program <a href="https://www.asfp.io/" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none" ></a>
-    -   *Disclaimer: I volunteer as an editor for ASFP.*
+-   "Why Do We Dream? A New Theory on How It Protects Our Brains" <a href="https://time.com/5925206/why-do-we-dream/" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none" ></a>
 
-## Professional development
+-   Induction of self awareness in dreams through frontal low current stimulation of gamma activity - Ursula Voss et. al. <a href="https://pubmed.ncbi.nlm.nih.gov/24816141/" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none" ></a>
 
--   Creating a simple and effective academic personal website <a href="https://www.elsevier.com/connect/creating-a-simple-and-effective-academic-personal-website" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none" ></a>
--   American Psychological Association - Tips for Determining Authorship Credit <a href="https://www.apa.org/science/leadership/students/authorship-paper" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none" ></a>
+-   "Study puts us one step closer to understanding the function of sleep" <a href="https://news.wisc.edu/study-puts-us-one-step-closer-to-understanding-the-function-of-sleep/" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none" ></a>
+
+-   The Functional Role of Dreaming in Emotional Processes <a href="https://www.frontiersin.org/article/10.3389/fpsyg.2019.00459/full" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none" ></a>
+
+
+## My favourite talks
+
+-   David Deutsch: Chemical scum that dream of distant quasars. 
+<a href="https://www.ted.com/talks/david_deutsch_chemical_scum_that_dream_of_distant_quasars?language=en" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none"></a>
+
+-   Ken Dill: The protein folding problem: A major conundrum of science. <a href="https://www.youtube.com/watch?v=zm-3kovWpNQ&list=PL7-2JDxLBi5ky7TkTsg9ZaXtw5tT3FbgU&index=20&t=4s" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none"></a>
+
+-   Lisa Feldman Barrett: You aren't at mercy of your emotions -- you create them. 
+<a href="https://www.ted.com/talks/lisa_feldman_barrett_you_aren_t_at_the_mercy_of_your_emotions_your_brain_creates_them?language=en" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none"></a>
+
+-   Mariana Mazzucato: Government -- investor, risk-taker, innovator.
+<a href="https://www.ted.com/talks/mariana_mazzucato_government_investor_risk_taker_innovator?language=en" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none"></a>
+
+-   Kay M. Tye: What investigating neural pathway can reveal about mental health
+<a href="https://www.ted.com/talks/kay_m_tye_what_investigating_neural_pathways_can_reveal_about_mental_health?language=en" class="fa-solid fa-arrow-up-right-from-square" target="_blank" style="text-decoration:none"></a>
 
 <!-- Add icon library -->
 
