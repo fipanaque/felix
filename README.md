@@ -1,2 +1,2 @@
-# hschmidt12.github.io
+# felix.github.io
 Site created using Quarto and hosted via GitHub Pages.
