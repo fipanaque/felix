@@ -5,7 +5,7 @@ format:
     page-layout: full
 ---
 
-Technological innovation fuels my passion. I am an Industrial & Systems engineer, MBA, neuroscientist, and tech entrepreneur. I am currently living in Tsukuba, Japan's renowned science city, where I am actively developing my next business idea. 
+Technological innovation fuels my passion. I am an Industrial & Systems engineer from [Universidad de Piura](https://www.udep.edu.pe/) in Peru, I hold a MBA from [Universidad Los Andes](https://uniandes.edu.co/en) in Colombia , Neuroscience PhD candidate at the [Univeristy of Tsukuba](https://www.tsukuba.ac.jp/en/) in Japan, and [tech entrepreneur](https://www.youtube.com/watch?v=M_PyRRqietw). I am currently living in Tsukuba, Japan's renowned science city, where I am actively developing my next business idea. 
 
 I envision a future where we share dream emotions just as easily as we share pictures and videos. This idea laid the groundwork for my Ph.D. Employing a neuroscience approach I link the brain activity of emotional experiences during wakefulness and dreaming states upon awakenings. Since dreams have a long history of being linked to emotional processing, they hold the potential to shape and influence human behavior, such as, adopt new habits, make better decisions or improve attention.
 

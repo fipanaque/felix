@@ -19,13 +19,13 @@ about:
       href: https://twitter.com/FelixIpanaqueAr
 ---
 
-<br> <br> I am an entrepreneur who transitioned into a scientist to gain new ideas for my next startup. 
+<br> <br> I am a former tech entrepreneur who transitioned into a scientist to gain new ideas and knowledge to built my next startup.
 
 Currently, I am pursuing my PhD in Neuroscience with a research focus on understanding the neural mechanisms underlying emotions in dreams. 
 
 I am using behavioral, computational, and neuroimaging methods to help people improve the quality of their sleep.
 
-I collaborate with Dr. Abe Takashi in the Human Sleep Lab at the International Institute for Integrative Sleep Medicine [(IIIS)](https://wpi-iiis.tsukuba.ac.jp/), University of Tsukuba in Ibaraki, Japan.
+I collaborate with Dr. Abe Takashi in the [Human Sleep Lab](https://www.u.tsukuba.ac.jp/~abe.takashi.gp/) at the International Institute for Integrative Sleep Medicine [(IIIS)](https://wpi-iiis.tsukuba.ac.jp/), University of Tsukuba in Ibaraki, Japan.
 
 <br> <br> My CV is available [here](files/Felix Ipanaque_CV.pdf).
 
