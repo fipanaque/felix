@@ -56,18 +56,13 @@ APEC is a regional economic forum to promote foreign trade across Asia-Pacific c
 
 I was invited to share my experiences on the Merge & Acquisition of PickApp by Scharff Inc.[PickApp by Scharff Inc.](https://www.facebook.com/felixipanaquear/photos/a.314611525680937/335734870235269/)
 
-SUP Summit is the largest annual meeting of the peruvian startup ecosystem. It takes place in December 2017 and aims to foster collaborative work and open innovation among different stakeholders of the peruvian entrepreneurial ecosystem.
+SUP Summit is the largest annual meeting of the peruvian startup ecosystem. It took place in December 2017 and aimed to foster collaborative work and open innovation among different stakeholders of the peruvian entrepreneurial ecosystem.
 
 ::: {layout-ncol=1}
 
 ![](images/supsummit20173.png){style="float:left;"width="300"}
 ![](images/supsummit20172.png){style="float:right;"width="400"}
 :::
-
-Eckardt, D., Helion, C., **Schmidt, H.**, Chen, J., & Murty, V.P.
-(under review).
-Storytelling changes the structure and perceived value of event memories.
-Under review at *Cognition*, May 31, 2023.
 
 
 ## Intercon 2016
