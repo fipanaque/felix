@@ -30,5 +30,5 @@ Currently, I am using behavioral, computational, and neuroimaging methods to hel
 I collaborate with Dr. Abe Takashi in the [Human Sleep Lab](https://www.u.tsukuba.ac.jp/~abe.takashi.gp/) at the International Institute for Integrative Sleep Medicine [(IIIS)](https://wpi-iiis.tsukuba.ac.jp/), University of Tsukuba in Ibaraki, Japan.
 
 
-#<br> <br> My CV is available [here](files/Felix Ipanaque_CV.pdf).
+<br> <br> My CV is available [here](files/CV_Felix_2024_v1.pdf).
 
