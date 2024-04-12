@@ -19,7 +19,9 @@ about:
       href: https://twitter.com/FelixIpanaqueAr
 ---
 
-<br> <br> Welcome! My name is Felix. I am a Ph.D. student with a research focus on understanding the neural mechanisms underlying emotions in dreams. Through my research, I aspire to develop insights and interventions that can help individuals enhance the quality of their sleep and unlock the full potential of their cognitive abilities.
+<br> <br> Welcome! My name is Felix. I am a Ph.D. student with a research focus on understanding the neural mechanisms underlying emotions in dreams. 
+
+Through my research, I aspire to develop insights and interventions that can help individuals enhance the quality of their sleep and unlock the full potential of their cognitive abilities.
 
 As a former tech entrepreneur who transitioned into a scientist to gain new ideas and knowledge, I've always been fascinated by the intersection of technology and human behavior. 
 
