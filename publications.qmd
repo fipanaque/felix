@@ -15,7 +15,7 @@ Tsukuba City has 150 research centers and more than 20,000 scientists working in
 ![](images/tsukuba_conference.jpg){style="float:right;"width="315"}
 :::
 
-## Appropiate Technology - Japan 2019
+## Appropriate Technology - Japan 2019
 
 Presentation on "How to kick-off your ideas?"
 
@@ -28,7 +28,7 @@ Appropiate Technology is conducted at The University of Tsukuba (Japan) under th
 ![](images/DSC_2301_1.jpg){style="float:right;"width="315"}
 :::
 
-## Appropiate Technology Demo Day - Japan 2018
+## Appropriate Technology Demo Day - Japan 2018
 
 Advisor, speaker and judge for the Demo Day of Appropiate Technology course. This course aims to give its students a holistic experience for developing a simple and low-cost technology for their target community. 
 Appropiate Technology is conducted at The University of Tsukuba (Japan) under the School of Integrative and Global Majors.
