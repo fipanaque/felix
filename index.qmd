@@ -25,10 +25,10 @@ Through my research, I aspire to develop insights and interventions that can hel
 
 As a former tech entrepreneur who transitioned into a scientist to gain new ideas and knowledge, I've always been fascinated by the intersection of technology and human behavior. 
 
-Currently, I am using behavioral, computational, and neuroimaging methods to help people improve the their sleep quality.
+Currently, I am using a brain computer interface approach to help people improve their sleep.
 
 I collaborate with Dr. Abe Takashi in the [Human Sleep Lab](https://www.u.tsukuba.ac.jp/~abe.takashi.gp/) at the International Institute for Integrative Sleep Medicine [(IIIS)](https://wpi-iiis.tsukuba.ac.jp/), University of Tsukuba in Ibaraki, Japan.
 
 
-<br> <br> My CV is available [here](files/CV_Felix_2024_v1.pdf).
+<br> <br> My CV is available [here](files/CV_Felix_202410.pdf).
 
