@@ -5,7 +5,7 @@ format:
     page-layout: full
 ---
 
-[Industrial and Systems Engineer](https://www.udep.edu.pe/) with  a strong focus on process optimization, [MBA](https://uniandes.edu.co/en) in Colombia. I am a Neuroscience PhD candidate at the [Univeristy of Tsukuba](https://www.tsukuba.ac.jp/en/) in Japan. Previously, [tech entrepreneur](https://www.youtube.com/watch?v=M_PyRRqietw). I am currently living in Tsukuba, Japan's renowned science city, where I am actively developing my next business idea. 
+[BSc. Industrial and Systems Engineer](https://www.udep.edu.pe/) with  a strong focus on process optimization, [MBA](https://uniandes.edu.co/en). I am a Neuroscience PhD candidate at the [Univeristy of Tsukuba](https://www.tsukuba.ac.jp/en/) in Japan. Previously, [tech entrepreneur](https://www.youtube.com/watch?v=M_PyRRqietw). I am currently living in Tsukuba, Japan's renowned science city, where I am actively developing my next business idea. 
 
 I am working on a project aimed at advancing the collection of emotional brain wave data during sleep, with the goal of improving our understanding of how emotions influence behavior. This work could lead to the development of brain-computer interfaces that enhance our ability to diagnose and treat brain disorders, such as depression and anxiety. This would be possible by enabling more precise monitoring and intervention based on emotional brain activity.
 
